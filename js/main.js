@@ -11,7 +11,7 @@ map.classList.remove('map--faded');
 
 var avatars = ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png', '07.png', '08.png',];
 var types = ['palace', 'flat', 'house', 'bungalo'];
-
+// функция получения рандомного индекса массива
 var shuffleArray = function (array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -21,11 +21,11 @@ var shuffleArray = function (array) {
     }
     return array[i];
 }
-
+// функция поиска рандомного числа в промежутке min, max
 var createNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
-
+// функция отрисовки маркеров
 var renderPin = function () {
   var pin = pinTemplate.cloneNode(true);
 
