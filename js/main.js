@@ -1,6 +1,8 @@
 'use strict';
 
 var map = document.querySelector('.map');
+var PIN_HEIGHT = 70;
+var PIN_WIDTH = 50;
 var pinTemplate = document.querySelector('#pin')
 .content
 .querySelector('.map__pin');
@@ -27,8 +29,8 @@ var createNumber = function (min, max) {
 var renderPin = function () {
   var pin = pinTemplate.cloneNode(true);
 
-  pin.style.left = createNumber(1, 1200) + 'px';
-  pin.style.top = createNumber(130, 630) + 'px';
+  pin.style.left = createNumber(1, 1200) - PIN_WIDTH / 2 + 'px';
+  pin.style.top = createNumber(130, 630) - PIN_HEIGHT + 'px';
   pin.querySelector('.map__img').src = 'img/avatars/user' + shuffleArray(avatars);
   pin.querySelector('.map__img').alt = 'Заголовок';
 
@@ -41,6 +43,6 @@ for (var i = 0; i < 8; i++) {
   fragment.appendChild(renderPin());
 };
 
-pinTemplate.appendChild(fragment);
+map.appendChild(fragment);
 
 console.log(fragment.appendChild(renderPin()));
