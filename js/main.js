@@ -9,18 +9,8 @@ var pinTemplate = document.querySelector('#pin')
 
 map.classList.remove('map--faded');
 
-var avatars = ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png', '07.png', '08.png',];
+var avatars = ['01', '02', '03', '04', '05', '06', '07', '08'];
 var types = ['palace', 'flat', 'house', 'bungalo'];
-// функция получения рандомного индекса массива
-var shuffleArray = function (array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array[i];
-}
 // функция поиска рандомного числа в промежутке min, max
 var createNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -31,8 +21,8 @@ var renderPin = function () {
 
   pin.style.left = createNumber(1, 1200) - PIN_WIDTH / 2 + 'px';
   pin.style.top = createNumber(130, 630) - PIN_HEIGHT + 'px';
-  pin.querySelector('.map__img').src = 'img/avatars/user' + shuffleArray(avatars);
-  pin.querySelector('.map__img').alt = 'Заголовок';
+  pin.querySelector('.map__img').src = 'img/avatars/user' + avatars[i] + '.png';
+  pin.querySelector('.map__img').alt = 'заголовок объявления';
 
    return pin;
 };
@@ -44,5 +34,3 @@ for (var i = 0; i < 8; i++) {
 };
 
 map.appendChild(fragment);
-
-console.log(fragment.appendChild(renderPin()));
