@@ -10,7 +10,7 @@ var pinTemplate = document.querySelector('#pin')
 map.classList.remove('map--faded');
 
 var avatars = ['01', '02', '03', '04', '05', '06', '07', '08'];
-var types = ['palace', 'flat', 'house', 'bungalo'];
+// var types = ['palace', 'flat', 'house', 'bungalo'];
 // функция поиска рандомного числа в промежутке min, max
 var createNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -24,13 +24,13 @@ var renderPin = function () {
   pin.querySelector('.map__img').src = 'img/avatars/user' + avatars[i] + '.png';
   pin.querySelector('.map__img').alt = 'заголовок объявления';
 
-   return pin;
+  return pin;
 };
 
 var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < 8; i++) {
   fragment.appendChild(renderPin());
-};
+}
 
 map.appendChild(fragment);
