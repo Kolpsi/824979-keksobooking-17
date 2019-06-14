@@ -8,7 +8,7 @@ var map = document.querySelector('.map');
 var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
-var avatars = [];
+
 
 map.classList.remove('map--faded');
 
@@ -24,7 +24,7 @@ var createrNumberAvatar = function (numberAvatars) {
   }
 };
 
-createrNumberAvatar(9);
+
 
 // функция поиска рандомного числа в промежутке min, max
 var getNumber = function (min, max) {
@@ -47,9 +47,9 @@ var createPinIformation = function (index) {
 };
 
 // функция отрисовки маркеров
-var renderPin = function () {
+var renderPin = function (index) {
   var pin = pinTemplate.cloneNode(true);
-  var pinIformation = createPinIformation(avatars[i]);
+  var pinIformation = createPinIformation(index);
 
   pin.style.left = pinIformation.location.x;
   pin.style.top = pinIformation.location.y;
@@ -62,7 +62,7 @@ var renderPin = function () {
 var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < 8; i++) {
-  fragment.appendChild(renderPin());
+  fragment.appendChild(renderPin(i));
 }
 
 map.appendChild(fragment);
