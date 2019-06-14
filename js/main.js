@@ -49,10 +49,11 @@ var createPinIformation = function (index) {
 // функция отрисовки маркеров
 var renderPin = function () {
   var pin = pinTemplate.cloneNode(true);
+  var pinIformation = createPinIformation(avatars[i]);
 
-  pin.style.left = createPinIformation().location.x;
-  pin.style.top = createPinIformation().location.y;
-  pin.querySelector('img').src = createPinIformation(avatars[i]).author.avatar;
+  pin.style.left = pinIformation.location.x;
+  pin.style.top = pinIformation.location.y;
+  pin.querySelector('img').src = pinIformation.author.avatar;
   pin.querySelector('img').alt = 'заголовок объявления';
 
   return pin;
