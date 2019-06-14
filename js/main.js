@@ -9,7 +9,6 @@ var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 
-
 map.classList.remove('map--faded');
 
 // функция выбора рандомного элемента
@@ -17,15 +16,6 @@ var getRandomElement = function (array) {
   var index = Math.floor(Math.random() * array.length);
   return array[index];
 };
-// функция создания номера аватара
-var createrNumberAvatar = function (numberAvatars) {
-  for (var i = 0; i < numberAvatars; i++) {
-    avatars.push(i);
-  }
-};
-
-
-
 // функция поиска рандомного числа в промежутке min, max
 var getNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -45,7 +35,6 @@ var createPinIformation = function (index) {
     }
   };
 };
-
 // функция отрисовки маркеров
 var renderPin = function (index) {
   var pin = pinTemplate.cloneNode(true);
