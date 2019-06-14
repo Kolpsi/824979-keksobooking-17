@@ -8,7 +8,7 @@ var map = document.querySelector('.map');
 var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
-var avatars = []
+var avatars = [];
 
 map.classList.remove('map--faded');
 
@@ -20,8 +20,8 @@ var getRandomElement = function (array) {
 // функция создания номера аватара
 var createrNumberAvatar = function (numberAvatars) {
   for (var i = 0; i < numberAvatars; i++) {
-  avatars.push(i);
-  };
+    avatars.push(i);
+  }
 };
 
 createrNumberAvatar(9);
