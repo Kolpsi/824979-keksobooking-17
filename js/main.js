@@ -25,7 +25,7 @@ var getNumber = function (min, max) {
 // функция создания номера аватара
 var createrNumberAvatar = function (numberAvatars) {
   for (var i = 1; i < numberAvatars; i++) {
-    avatars.push('img/avatars/user0' + i + '.png')
+    avatars.push('img/avatars/user0' + i + '.png');
   }
 };
 
