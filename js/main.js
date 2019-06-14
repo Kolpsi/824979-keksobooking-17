@@ -19,14 +19,14 @@ var getRandomElement = function (array) {
 };
 
 // функция поиска рандомного числа в промежутке min, max
-var createNumber = function (min, max) {
+var getNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 // функция создания номера аватара
 var createrNumberAvatar = function (numberAvatars) {
   for (var i = 1; i < numberAvatars; i++) {
-  avatars.push('img/avatars/user0' + i + '.png');
-  };
+    avatars.push('img/avatars/user0' + i + '.png')
+  }
 };
 
 createrNumberAvatar(9);
@@ -37,13 +37,13 @@ var createPinIformation = function () {
       avatar: createrNumberAvatar()
     },
     location: {
-      x:createNumber(1, 1200) - PIN_X + 'px',
-      y:createNumber(130, 630) - PIN_HEIGHT + 'px'
+      x: getNumber(1, 1200) - PIN_X + 'px',
+      y: getNumber(130, 630) - PIN_HEIGHT + 'px'
     },
     offer: {
       type: getRandomElement(TYPES)
     }
-  }
+  };
 };
 
 // функция отрисовки маркеров
@@ -61,7 +61,7 @@ var renderPin = function () {
 var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < 8; i++) {
-  createPinIformation()
+  createPinIformation();
   fragment.appendChild(renderPin());
 }
 
