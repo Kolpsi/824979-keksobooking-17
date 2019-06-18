@@ -54,34 +54,63 @@ for (var i = 0; i < 8; i++) {
   fragment.appendChild(renderPin(i));
 }
 
-// map.appendChild(fragment);
-
-var mainOpen = document.querySelector('.map__pin--main');
+// ЗАДАНИЕ №4
+var MAIN_PIN_WIDTH = 65;
+var MAIN_PIN_Y = 70;
+var MAIN_PIN_X = 65 / 2;
+var MAIN_PIN_Y_ENABLED = 65 / 2
+var mainPin = map.querySelector('.map__pin--main');
 var form = document.querySelector('.ad-form');
 var inputList = document.querySelectorAll('input');
 var selectList = document.querySelectorAll('select');
+var formFilter = map.querySelector('.map__filters');
+var formAddress = document.querySelector('#address');
 
-mainOpen.addEventListener('click', function () {
-  map.classList.remove('map--faded');
-  form.classList.remove('ad-form--disabled');
-  enabledElement(selectList);
-  enabledElement(inputList);
+formFilter.classList.add('map__filters--disabled');
+
+mainPin.addEventListener('click', function (evt) {
+  evt.preventDefault()
+  onMainPinActivated();
+  map.appendChild(fragment);
 });
 
+mainPin.addEventListener('mouseup', function () {
+  setAddress(mainPin, MAIN_PIN_X, MAIN_PIN_Y);
+});
+// функция активирования страницы
+var onMainPinActivated = function () {
+  map.classList.remove('map--faded');
+  form.classList.remove('ad-form--disabled');
+  formFilter.classList.remove('map__filters--disabled');
+  enabledElement(selectList);
+  enabledElement(inputList);
+}
+
+// функция отключения элемента
 var disabledElement = function (array) {
   for (var i = 0; i < array.length; i++){
    var arrayElem = array[i];
    arrayElem.disabled = true;
   };
 };
-
+// функция подключения элемента
 var enabledElement = function (array) {
   for (var i = 0; i < array.length; i++){
    var arrayElem = array[i];
    arrayElem.disabled = false;
   };
 }
-
 disabledElement(inputList);
 disabledElement(selectList);
+// функция получения адреса главной метки
+var setAddress = function (elem, x, y) {
+  var coordX = elem.offsetLeft - x;
+  var coordY = elem.offsetTop + y;
+  formAddress.value = coordX + ',' + coordY;
+};
+
+setAddress(mainPin, MAIN_PIN_X, MAIN_PIN_Y_ENABLED);
+
+
+
 console.log();
