@@ -84,22 +84,22 @@ var onMainPinActivated = function () {
   formFilter.classList.remove('map__filters--disabled');
   enabledElement(selectList);
   enabledElement(inputList);
-}
+};
 
 // функция отключения элемента
 var disabledElement = function (array) {
   for (var i = 0; i < array.length; i++){
    var arrayElem = array[i];
    arrayElem.disabled = true;
-  };
+  }
 };
 // функция подключения элемента
 var enabledElement = function (array) {
   for (var i = 0; i < array.length; i++){
    var arrayElem = array[i];
    arrayElem.disabled = false;
-  };
-}
+  }
+};
 disabledElement(inputList);
 disabledElement(selectList);
 // функция получения адреса главной метки
@@ -110,7 +110,3 @@ var setAddress = function (elem, x, y) {
 };
 
 setAddress(mainPin, MAIN_PIN_X, MAIN_PIN_Y_ENABLED);
-
-
-
-console.log();
