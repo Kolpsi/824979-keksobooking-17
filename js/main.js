@@ -9,7 +9,7 @@ var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 
-map.classList.remove('map--faded');
+// map.classList.remove('map--faded');
 
 // функция выбора рандомного элемента
 var getRandomElement = function (array) {
@@ -54,5 +54,34 @@ for (var i = 0; i < 8; i++) {
   fragment.appendChild(renderPin(i));
 }
 
-map.appendChild(fragment);
+// map.appendChild(fragment);
 
+var mainOpen = document.querySelector('.map__pin--main');
+var form = document.querySelector('.ad-form');
+var inputList = document.querySelectorAll('input');
+var selectList = document.querySelectorAll('select');
+
+mainOpen.addEventListener('click', function () {
+  map.classList.remove('map--faded');
+  form.classList.remove('ad-form--disabled');
+  enabledElement(selectList);
+  enabledElement(inputList);
+});
+
+var disabledElement = function (array) {
+  for (var i = 0; i < array.length; i++){
+   var arrayElem = array[i];
+   arrayElem.disabled = true;
+  };
+};
+
+var enabledElement = function (array) {
+  for (var i = 0; i < array.length; i++){
+   var arrayElem = array[i];
+   arrayElem.disabled = false;
+  };
+}
+
+disabledElement(inputList);
+disabledElement(selectList);
+console.log();
