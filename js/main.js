@@ -59,6 +59,28 @@ map.appendChild(fragment);
 
 var type = document.querySelector('#type');
 var price = document.querySelector('#price');
+var timeIn = document.querySelector('#timein');
+var timeOut = document.querySelector('#timeout');
+
+var  synchronizationCheckIn = function () {
+  if (timeIn.value === '12:00') {
+    timeOut.value = '12:00';
+  } if (timeIn.value === '13:00') {
+    timeOut.value = '13:00';
+  } if (timeIn.value === '14:00') {
+    timeOut.value = '14:00';
+  }
+};
+
+var  synchronizationCheckOut = function () {
+  if (timeOut.value === '12:00') {
+    timeIn.value = '12:00';
+  } if (timeOut.value === '13:00') {
+    timeIn.value = '13:00';
+  } if (timeOut.value === '14:00') {
+    timein.value = '14:00';
+  }
+};
 
 var getPriceNight = function () {
   if (type.value === 'bungalo') {
@@ -76,6 +98,7 @@ var getPriceNight = function () {
   }
 };
 
-type.addEventListener("click", getPriceNight);
-
-console.log();
+type.addEventListener('click', getPriceNight);
+timeIn.addEventListener('click', synchronizationCheckIn);
+timeOut.addEventListener('click', synchronizationCheckOut);
+console.log(timeOut.value);
