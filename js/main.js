@@ -96,7 +96,7 @@ setAddress(mainPin);
 // функция проверки неактивности формы
 function isFormDisabled() {
   return map.classList.contains('map--faded');
-};
+}
 // функция активированя и деактивирования элементов
 var toggleAvailabilityFields = function (array) {
   for (i = 0; i < array.length; i++) {
