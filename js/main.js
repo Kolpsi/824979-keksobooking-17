@@ -9,7 +9,7 @@ var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 
-map.classList.remove('map--faded');
+// map.classList.remove('map--faded');
 
 // функция выбора рандомного элемента
 var getRandomElement = function (array) {
@@ -54,5 +54,60 @@ for (var i = 0; i < 8; i++) {
   fragment.appendChild(renderPin(i));
 }
 
-map.appendChild(fragment);
+// ЗАДАНИЕ №4
+var mainPin = map.querySelector('.map__pin--main');
+var form = document.querySelector('.ad-form');
+var inputList = document.querySelectorAll('input');
+var selectList = document.querySelectorAll('select');
+var formFilter = map.querySelector('.map__filters');
+var formAddress = document.querySelector('#address');
 
+formFilter.classList.add('map__filters--disabled');
+// Функция обработки события на клик по пину
+var onPinClick = function (evt) {
+  evt.preventDefault();
+  onMainPinActivated();
+  map.appendChild(fragment);
+  mainPin.removeEventListener('click', onPinClick);
+};
+
+mainPin.addEventListener('click', onPinClick);
+
+mainPin.addEventListener('mouseup', function () {
+  setAddress(mainPin);
+});
+// функция активирования страницы
+var onMainPinActivated = function () {
+  map.classList.remove('map--faded');
+  form.classList.remove('ad-form--disabled');
+  formFilter.classList.remove('map__filters--disabled');
+  toggleAvailabilityFields(inputList);
+  toggleAvailabilityFields(selectList);
+};
+
+// функция получения адреса главной метки
+var setAddress = function (elem) {
+  var coordX = Math.round(elem.offsetLeft + elem.clientWidth);
+  var coordY = Math.round(elem.offsetTop + elem.clientHeight);
+  formAddress.value = coordX + ', ' + coordY;
+};
+
+setAddress(mainPin);
+// функция проверки неактивности формы
+function isFormDisabled() {
+  return map.classList.contains('map--faded');
+}
+// функция активированя и деактивирования элементов
+var toggleAvailabilityFields = function (array) {
+  for (i = 0; i < array.length; i++) {
+    var arrayElem = array[i];
+    if (isFormDisabled()) {
+      arrayElem.disabled = true;
+    } else {
+      arrayElem.disabled = false;
+    }
+  }
+};
+
+toggleAvailabilityFields(inputList);
+toggleAvailabilityFields(selectList);
