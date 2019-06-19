@@ -56,3 +56,26 @@ for (var i = 0; i < 8; i++) {
 
 map.appendChild(fragment);
 
+
+var type = document.querySelector('#type');
+var price = document.querySelector('#price');
+
+var getPriceNight = function () {
+  if (type.value === 'bungalo') {
+    price.min = 0;
+    price.placeholder = 0;
+  } if (type.value === 'flat') {
+    price.min = 1000;
+    price.placeholder = 1000;
+  } if (type.value === 'palace') {
+    price.min = 10000;
+    price.placeholder = 10000;
+  } if (type.value === 'house') {
+    price.min = 5000;
+    price.placeholder = 5000;
+  }
+};
+
+type.addEventListener("click", getPriceNight);
+
+console.log();
