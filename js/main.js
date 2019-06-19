@@ -55,10 +55,6 @@ for (var i = 0; i < 8; i++) {
 }
 
 // ЗАДАНИЕ №4
-var MAIN_PIN_WIDTH = 65;
-var MAIN_PIN_Y = 70;
-var MAIN_PIN_X = MAIN_PIN_WIDTH / 2;
-var MAIN_PIN_Y_ENABLED = 65 / 2;
 var mainPin = map.querySelector('.map__pin--main');
 var form = document.querySelector('.ad-form');
 var inputList = document.querySelectorAll('input');
@@ -67,46 +63,51 @@ var formFilter = map.querySelector('.map__filters');
 var formAddress = document.querySelector('#address');
 
 formFilter.classList.add('map__filters--disabled');
-
-mainPin.addEventListener('click', function (evt) {
+// Функция обработки события на клик по пину
+var onPinClick = function (evt) {
   evt.preventDefault();
   onMainPinActivated();
   map.appendChild(fragment);
-});
+  mainPin.removeEventListener('click', onPinClick);
+};
+
+mainPin.addEventListener('click', onPinClick);
 
 mainPin.addEventListener('mouseup', function () {
-  setAddress(mainPin, MAIN_PIN_X, MAIN_PIN_Y);
+  setAddress(mainPin);
 });
 // функция активирования страницы
 var onMainPinActivated = function () {
   map.classList.remove('map--faded');
   form.classList.remove('ad-form--disabled');
   formFilter.classList.remove('map__filters--disabled');
-  enabledElement(selectList);
-  enabledElement(inputList);
+  toggleAvailabilityFields(inputList);
+  toggleAvailabilityFields(selectList);
 };
 
-// функция отключения элемента
-var disabledElement = function (array) {
-  for (i = 0; i < array.length; i++) {
-    var arrayElem = array[i];
-    arrayElem.disabled = true;
-  }
-};
-// функция подключения элемента
-var enabledElement = function (array) {
-  for (i = 0; i < array.length; i++) {
-    var arrayElem = array[i];
-    arrayElem.disabled = false;
-  }
-};
-disabledElement(inputList);
-disabledElement(selectList);
 // функция получения адреса главной метки
-var setAddress = function (elem, x, y) {
-  var coordX = elem.offsetLeft - x;
-  var coordY = elem.offsetTop + y;
-  formAddress.value = coordX + ',' + coordY;
+var setAddress = function (elem) {
+  var coordX = Math.round(elem.offsetLeft + elem.clientWidth);
+  var coordY = Math.round(elem.offsetTop + elem.clientHeight);
+  formAddress.value = coordX + ', ' + coordY;
 };
 
-setAddress(mainPin, MAIN_PIN_X, MAIN_PIN_Y_ENABLED);
+setAddress(mainPin);
+// функция проверки неактивности формы
+function isFormDisabled() {
+  return map.classList.contains('map--faded');
+};
+// функция активированя и деактивирования элементов
+var toggleAvailabilityFields = function (array) {
+  for (i = 0; i < array.length; i++) {
+    var arrayElem = array[i];
+    if (isFormDisabled()) {
+      arrayElem.disabled = true;
+    } else {
+      arrayElem.disabled = false;
+    }
+  }
+};
+
+toggleAvailabilityFields(inputList);
+toggleAvailabilityFields(selectList);
