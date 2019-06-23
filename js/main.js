@@ -124,7 +124,7 @@ var priceTypes = {
   palace: 10000
 };
 // функция синхронизации времени
-var OnChangeTime = function (time) {
+var OnChangeTime = function () {
   timeIn.value = this.value;
   timeOut.value = this.value;
 };
