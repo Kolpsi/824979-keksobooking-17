@@ -122,15 +122,14 @@ var priceTypes = {
   flat: 1000,
   house: 5000,
   palace: 10000
-}
-
+};
 var onChangeTime = function () {
-  timeIn.value = this.value
-  timeOut.value = this.value
+  timeIn.value = this.value;
+  timeOut.value = this.value;
 };
 
 var onChangeType = function () {
-  price.min = price.placeholder = priceTypes[type.value]
+  price.min = price.placeholder = priceTypes[type.value];
 };
 
 type.addEventListener('click', onChangeType);
