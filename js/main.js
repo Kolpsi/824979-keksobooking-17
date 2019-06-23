@@ -62,43 +62,22 @@ var price = document.querySelector('#price');
 var timeIn = document.querySelector('#timein');
 var timeOut = document.querySelector('#timeout');
 
-var  synchronizationCheckIn = function () {
-  if (timeIn.value === '12:00') {
-    timeOut.value = '12:00';
-  } if (timeIn.value === '13:00') {
-    timeOut.value = '13:00';
-  } if (timeIn.value === '14:00') {
-    timeOut.value = '14:00';
-  }
+var priceTypes = {
+  bungalo: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000
+}
+
+var onChangeTime = function () {
+  timeIn.value = this.value
+  timeOut.value = this.value
 };
 
-var  synchronizationCheckOut = function () {
-  if (timeOut.value === '12:00') {
-    timeIn.value = '12:00';
-  } if (timeOut.value === '13:00') {
-    timeIn.value = '13:00';
-  } if (timeOut.value === '14:00') {
-    timein.value = '14:00';
-  }
+var onChangeType = function () {
+  price.min = price.placeholder = priceTypes[type.value]
 };
 
-var getPriceNight = function () {
-  if (type.value === 'bungalo') {
-    price.min = 0;
-    price.placeholder = 0;
-  } if (type.value === 'flat') {
-    price.min = 1000;
-    price.placeholder = 1000;
-  } if (type.value === 'palace') {
-    price.min = 10000;
-    price.placeholder = 10000;
-  } if (type.value === 'house') {
-    price.min = 5000;
-    price.placeholder = 5000;
-  }
-};
-
-type.addEventListener('click', getPriceNight);
-timeIn.addEventListener('click', synchronizationCheckIn);
-timeOut.addEventListener('click', synchronizationCheckOut);
-console.log(timeOut.value);
+type.addEventListener('click', onChangeType);
+timeIn.addEventListener('mouseup', onChangeTime);
+timeOut.addEventListener('mouseup', onChangeTime);
