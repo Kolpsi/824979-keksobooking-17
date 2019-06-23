@@ -123,11 +123,12 @@ var priceTypes = {
   house: 5000,
   palace: 10000
 };
-var onChangeTime = function () {
+// функция синхронизации времени
+var OnChangeTime = function (time) {
   timeIn.value = this.value;
   timeOut.value = this.value;
 };
-
+// функция смены минимальной цены за ночь
 var onChangeType = function () {
   price.min = price.placeholder = priceTypes[type.value];
 };
