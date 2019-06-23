@@ -134,5 +134,5 @@ var onChangeType = function () {
 };
 
 type.addEventListener('click', onChangeType);
-timeIn.addEventListener('mouseup', onChangeTime);
-timeOut.addEventListener('mouseup', onChangeTime);
+timeIn.addEventListener('mouseup', OnChangeTime);
+timeOut.addEventListener('mouseup', OnChangeTime);
