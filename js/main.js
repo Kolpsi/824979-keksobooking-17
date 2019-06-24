@@ -124,9 +124,9 @@ var priceTypes = {
   palace: 10000
 };
 // функция синхронизации времени
-var onChangeTime = function () {
-  timeIn.value = event.target.value;
-  timeOut.value = event.target.value;
+var onChangeTime = function (evt) {
+  timeIn.value = evt.target.value;
+  timeOut.value = evt.target.value;
 };
 // функция смены минимальной цены за ночь
 var onChangeType = function () {
