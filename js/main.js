@@ -124,15 +124,15 @@ var priceTypes = {
   palace: 10000
 };
 // функция синхронизации времени
-var OnChangeTime = function () {
-  timeIn.value = this.value;
-  timeOut.value = this.value;
+var onChangeTime = function () {
+  timeIn.value = event.target.value;
+  timeOut.value = event.target.value;
 };
 // функция смены минимальной цены за ночь
 var onChangeType = function () {
   price.min = price.placeholder = priceTypes[type.value];
 };
 
-type.addEventListener('click', onChangeType);
-timeIn.addEventListener('mouseup', OnChangeTime);
-timeOut.addEventListener('mouseup', OnChangeTime);
+type.addEventListener('change', onChangeType);
+timeIn.addEventListener('change', onChangeTime);
+timeOut.addEventListener('change', onChangeTime);
