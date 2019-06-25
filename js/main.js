@@ -35,14 +35,8 @@ var createPinIformation = function (index) {
     author: {
       avatar: 'img/avatars/user0' + (index + 1) + '.png'
     },
-    address: {
-      x: location.x + PIN_WIDTH / 2,
-      y: location.y + PIN_HEIGHT
-    },
-    location: {
-      x: getNumber(1, MAP_WIDTH - PIN_WIDTH),
-      y: getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
-    },
+    address: address,
+    location: location,
     offer: {
       type: getRandomElement(TYPES)
     }
