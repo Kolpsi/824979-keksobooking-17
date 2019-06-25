@@ -3,13 +3,13 @@
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var PIN_HEIGHT = 70;
 var PIN_WIDTH = 50;
-var PIN_X = PIN_WIDTH / 2;
+var TOP_LIMITER_PIN = 130;
+var BOTTOM_LIMITER_PIN = 630;
+var MAP_WIDTH = 1200;
 var map = document.querySelector('.map');
 var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
-
-// map.classList.remove('map--faded');
 
 // функция выбора рандомного элемента
 var getRandomElement = function (array) {
@@ -22,13 +22,26 @@ var getNumber = function (min, max) {
 };
 // функция созданя сгенерированных JS объектов
 var createPinIformation = function (index) {
+  var location = {
+    x: getNumber(1, MAP_WIDTH - PIN_WIDTH),
+    y: getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
+  };
+
+  var address = {
+    x: location.x + PIN_WIDTH / 2,
+    y: location.y + PIN_HEIGHT
+  };
   return {
     author: {
       avatar: 'img/avatars/user0' + (index + 1) + '.png'
     },
+    address: {
+      x: location.x + PIN_WIDTH / 2,
+      y: location.y + PIN_HEIGHT
+    },
     location: {
-      x: getNumber(1, 1200) - PIN_X + 'px',
-      y: getNumber(130, 630) - PIN_HEIGHT + 'px'
+      x: getNumber(1, MAP_WIDTH - PIN_WIDTH),
+      y: getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
     },
     offer: {
       type: getRandomElement(TYPES)
@@ -40,8 +53,8 @@ var renderPin = function (index) {
   var pin = pinTemplate.cloneNode(true);
   var pinIformation = createPinIformation(index);
 
-  pin.style.left = pinIformation.location.x;
-  pin.style.top = pinIformation.location.y;
+  pin.style.left = pinIformation.location.x + 'px';
+  pin.style.top = pinIformation.location.y + 'px';
   pin.querySelector('img').src = pinIformation.author.avatar;
   pin.querySelector('img').alt = 'заголовок объявления';
 
@@ -143,8 +156,6 @@ mainPin.addEventListener('mousedown', function () {
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
 
-    var TOP_LIMITER_PIN = 130;
-    var BOTTOM_LIMITER_PIN = 630;
     // получение координат карты
     var fieldCoords = mainMap.getBoundingClientRect();
 
@@ -195,4 +206,3 @@ mainPin.addEventListener('mousedown', function () {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
-
