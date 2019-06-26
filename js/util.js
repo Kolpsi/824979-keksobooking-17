@@ -7,7 +7,7 @@
     isFormDisabled: function () {
       return map.classList.contains('map--faded');
     },
-    // функция активированя и деактивирования элементов
+    // функция активирования и деактивирования элементов
     toggleAvailabilityFields: function (array) {
       for (var i = 0; i < array.length; i++) {
         var arrayElem = array[i];
@@ -22,7 +22,7 @@
     getNumber: function (min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     },
-    // функция выбора рандомного элемента
+    // функция возврата рандомного элемента
     getRandomElement: function (array) {
       var index = Math.floor(Math.random() * array.length);
       return array[index];

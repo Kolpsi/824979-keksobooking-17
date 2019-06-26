@@ -1,6 +1,6 @@
 'use strict';
 // Модуль отрисовки пина
-// Задание №5
+
 (function () {
   var TOP_LIMITER_PIN = 130;
   var BOTTOM_LIMITER_PIN = 630;
@@ -8,7 +8,7 @@
   var formAddress = document.querySelector('#address');
   var mainPin = map.querySelector('.map__pin--main');
   var mainMap = document.querySelector('.map__pins');
-  // функция получения адреса главной метки
+  // функция получения адреса метки и передачи в input
   var setAddress = function (elem) {
     var coordX = Math.round(elem.offsetLeft + elem.clientWidth / 2);
     var coordY = Math.round(elem.offsetTop + elem.clientHeight);
@@ -18,6 +18,7 @@
   setAddress(mainPin);
 
   mainPin.addEventListener('mousedown', function () {
+    // передача адреса в input
     setAddress(mainPin);
     // функция перетаскивания маркера
     var onMouseMove = function (moveEvt) {
@@ -41,12 +42,10 @@
         pinCoords.top = TOP_LIMITER_PIN;
       }
 
-
       // вылезает за левую границу - разместить по ней
       if (pinCoords.left < mainMap.clientLeft) {
         pinCoords.left = mainMap.clientLeft;
       }
-
 
       // вылезает за правую границу - разместить по ней
       if (pinCoords.left + mainPin.clientWidth > mainMap.clientWidth) {
@@ -65,7 +64,7 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
       setAddress(mainPin);
-
+      // снятие обработчиков события
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
