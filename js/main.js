@@ -3,13 +3,13 @@
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var PIN_HEIGHT = 70;
 var PIN_WIDTH = 50;
-var PIN_X = PIN_WIDTH / 2;
+var TOP_LIMITER_PIN = 130;
+var BOTTOM_LIMITER_PIN = 630;
+var MAP_WIDTH = 1200;
 var map = document.querySelector('.map');
 var pinTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
-
-// map.classList.remove('map--faded');
 
 // функция выбора рандомного элемента
 var getRandomElement = function (array) {
@@ -22,14 +22,21 @@ var getNumber = function (min, max) {
 };
 // функция созданя сгенерированных JS объектов
 var createPinIformation = function (index) {
+  var location = {
+    x: getNumber(1, MAP_WIDTH - PIN_WIDTH),
+    y: getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
+  };
+
+  var address = {
+    x: location.x + PIN_WIDTH / 2,
+    y: location.y + PIN_HEIGHT
+  };
   return {
     author: {
       avatar: 'img/avatars/user0' + (index + 1) + '.png'
     },
-    location: {
-      x: getNumber(1, 1200) - PIN_X + 'px',
-      y: getNumber(130, 630) - PIN_HEIGHT + 'px'
-    },
+    address: address,
+    location: location,
     offer: {
       type: getRandomElement(TYPES)
     }
@@ -40,8 +47,8 @@ var renderPin = function (index) {
   var pin = pinTemplate.cloneNode(true);
   var pinIformation = createPinIformation(index);
 
-  pin.style.left = pinIformation.location.x;
-  pin.style.top = pinIformation.location.y;
+  pin.style.left = pinIformation.location.x + 'px';
+  pin.style.top = pinIformation.location.y + 'px';
   pin.querySelector('img').src = pinIformation.author.avatar;
   pin.querySelector('img').alt = 'заголовок объявления';
 
@@ -68,14 +75,9 @@ var onPinClick = function (evt) {
   evt.preventDefault();
   onMainPinActivated();
   map.appendChild(fragment);
-  mainPin.removeEventListener('click', onPinClick);
+  mainPin.removeEventListener('mousedown', onPinClick);
 };
 
-mainPin.addEventListener('click', onPinClick);
-
-mainPin.addEventListener('mouseup', function () {
-  setAddress(mainPin);
-});
 // функция активирования страницы
 var onMainPinActivated = function () {
   map.classList.remove('map--faded');
@@ -87,7 +89,7 @@ var onMainPinActivated = function () {
 
 // функция получения адреса главной метки
 var setAddress = function (elem) {
-  var coordX = Math.round(elem.offsetLeft + elem.clientWidth);
+  var coordX = Math.round(elem.offsetLeft + elem.clientWidth / 2);
   var coordY = Math.round(elem.offsetTop + elem.clientHeight);
   formAddress.value = coordX + ', ' + coordY;
 };
@@ -136,3 +138,65 @@ var onChangeType = function () {
 type.addEventListener('change', onChangeType);
 timeIn.addEventListener('change', onChangeTime);
 timeOut.addEventListener('change', onChangeTime);
+
+// Задание №5
+var mainMap = document.querySelector('.map__pins');
+
+mainPin.addEventListener('mousedown', onPinClick);
+
+mainPin.addEventListener('mousedown', function () {
+  setAddress(mainPin);
+  // функция перетаскивания маркера
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    // получение координат карты
+    var fieldCoords = mainMap.getBoundingClientRect();
+
+    var fieldInnerCoords = {
+      top: fieldCoords.top + mainMap.clientTop,
+      left: fieldCoords.left + mainMap.clientLeft
+    };
+
+    var pinCoords = {
+      top: event.clientY - fieldInnerCoords.top - mainPin.clientHeight,
+      left: event.clientX - fieldInnerCoords.left - mainPin.clientWidth
+    };
+
+    // вылезает за верхнюю границу - разместить по ней
+    if (pinCoords.top < TOP_LIMITER_PIN) {
+      pinCoords.top = TOP_LIMITER_PIN;
+    }
+
+
+    // вылезает за левую границу - разместить по ней
+    if (pinCoords.left < mainMap.clientLeft) {
+      pinCoords.left = mainMap.clientLeft;
+    }
+
+
+    // вылезает за правую границу - разместить по ней
+    if (pinCoords.left + mainPin.clientWidth > mainMap.clientWidth) {
+      pinCoords.left = mainMap.clientWidth - mainPin.clientWidt;
+    }
+
+    // вылезает за нижнюю границу - разместить по ней
+    if (pinCoords.top + mainPin.clientHeight > mainMap.clientHeight) {
+      pinCoords.top = BOTTOM_LIMITER_PIN;
+    }
+
+    mainPin.style.left = pinCoords.left + 'px';
+    mainPin.style.top = pinCoords.top + 'px';
+  };
+  // отжатие кнопки мыши
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    setAddress(mainPin);
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
