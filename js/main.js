@@ -87,14 +87,6 @@ var onMainPinActivated = function () {
   toggleAvailabilityFields(selectList);
 };
 
-// функция получения адреса главной метки
-var setAddress = function (elem) {
-  var coordX = Math.round(elem.offsetLeft + elem.clientWidth / 2);
-  var coordY = Math.round(elem.offsetTop + elem.clientHeight);
-  formAddress.value = coordX + ', ' + coordY;
-};
-
-setAddress(mainPin);
 // функция проверки неактивности формы
 function isFormDisabled() {
   return map.classList.contains('map--faded');
@@ -113,90 +105,3 @@ var toggleAvailabilityFields = function (array) {
 
 toggleAvailabilityFields(inputList);
 toggleAvailabilityFields(selectList);
-
-var type = document.querySelector('#type');
-var price = document.querySelector('#price');
-var timeIn = document.querySelector('#timein');
-var timeOut = document.querySelector('#timeout');
-
-var priceTypes = {
-  bungalo: 0,
-  flat: 1000,
-  house: 5000,
-  palace: 10000
-};
-// функция синхронизации времени
-var onChangeTime = function (evt) {
-  timeIn.value = evt.target.value;
-  timeOut.value = evt.target.value;
-};
-// функция смены минимальной цены за ночь
-var onChangeType = function () {
-  price.min = price.placeholder = priceTypes[type.value];
-};
-
-type.addEventListener('change', onChangeType);
-timeIn.addEventListener('change', onChangeTime);
-timeOut.addEventListener('change', onChangeTime);
-
-// Задание №5
-var mainMap = document.querySelector('.map__pins');
-
-mainPin.addEventListener('mousedown', onPinClick);
-
-mainPin.addEventListener('mousedown', function () {
-  setAddress(mainPin);
-  // функция перетаскивания маркера
-  var onMouseMove = function (moveEvt) {
-    moveEvt.preventDefault();
-
-    // получение координат карты
-    var fieldCoords = mainMap.getBoundingClientRect();
-
-    var fieldInnerCoords = {
-      top: fieldCoords.top + mainMap.clientTop,
-      left: fieldCoords.left + mainMap.clientLeft
-    };
-
-    var pinCoords = {
-      top: event.clientY - fieldInnerCoords.top - mainPin.clientHeight,
-      left: event.clientX - fieldInnerCoords.left - mainPin.clientWidth
-    };
-
-    // вылезает за верхнюю границу - разместить по ней
-    if (pinCoords.top < TOP_LIMITER_PIN) {
-      pinCoords.top = TOP_LIMITER_PIN;
-    }
-
-
-    // вылезает за левую границу - разместить по ней
-    if (pinCoords.left < mainMap.clientLeft) {
-      pinCoords.left = mainMap.clientLeft;
-    }
-
-
-    // вылезает за правую границу - разместить по ней
-    if (pinCoords.left + mainPin.clientWidth > mainMap.clientWidth) {
-      pinCoords.left = mainMap.clientWidth - mainPin.clientWidt;
-    }
-
-    // вылезает за нижнюю границу - разместить по ней
-    if (pinCoords.top + mainPin.clientHeight > mainMap.clientHeight) {
-      pinCoords.top = BOTTOM_LIMITER_PIN;
-    }
-
-    mainPin.style.left = pinCoords.left + 'px';
-    mainPin.style.top = pinCoords.top + 'px';
-  };
-  // отжатие кнопки мыши
-  var onMouseUp = function (upEvt) {
-    upEvt.preventDefault();
-    setAddress(mainPin);
-
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  };
-
-  document.addEventListener('mousemove', onMouseMove);
-  document.addEventListener('mouseup', onMouseUp);
-});
