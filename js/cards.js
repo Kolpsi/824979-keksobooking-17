@@ -16,6 +16,7 @@
   var inputList = document.querySelectorAll('input');
   var selectList = document.querySelectorAll('select');
   var formFilter = map.querySelector('.map__filters');
+  var fragment = document.createDocumentFragment();
 
   formFilter.classList.add('map__filters--disabled');
   // Функция первого активирования страницы
@@ -41,21 +42,24 @@
   mainPin.addEventListener('mousedown', onPinClick);
   // функция созданя сгенерированных JS объектов
   var createPinIformation = function (index) {
+    // определяет положение метки
     var location = {
       x: window.util.getNumber(1, MAP_WIDTH - PIN_WIDTH),
       y: window.util.getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
     };
-
+    // добавляет адрес
     var address = {
       x: location.x + PIN_WIDTH / 2,
       y: location.y + PIN_HEIGHT
     };
     return {
+      // возвращает автора
       author: {
         avatar: 'img/avatars/user0' + (index + 1) + '.png'
       },
       address: address,
       location: location,
+      // возвращает тип жилья
       offer: {
         type: window.util.getRandomElement(TYPES)
       }
@@ -74,7 +78,6 @@
     return pin;
   };
 
-  var fragment = document.createDocumentFragment();
   // цикл отрисовки случайных меток
   for (var i = 0; i < 8; i++) {
     fragment.appendChild(renderPin(i));
