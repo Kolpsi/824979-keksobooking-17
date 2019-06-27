@@ -42,7 +42,9 @@
   window.util.toggleAvailabilityFields(inputList);
   window.util.toggleAvailabilityFields(selectList);
 
-
+  /**
+  * событие первого активирвания страницы
+  */
   mainPin.addEventListener('mousedown', onPinClick);
 
   /**
