@@ -1,11 +1,9 @@
 'use strict';
 // Модуль отрисовки пина
-
 (function () {
   var TOP_LIMITER_PIN = 130;
   var BOTTOM_LIMITER_PIN = 630;
   var map = document.querySelector('.map');
-  var formAddress = document.querySelector('#address');
   var mainPin = map.querySelector('.map__pin--main');
   var mainMap = document.querySelector('.map__pins');
   window.setAddress(mainPin);

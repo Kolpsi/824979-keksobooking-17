@@ -1,15 +1,6 @@
 'use strict';
-// Модуль отрисовки карточек
+// модуль взаимодействия с картой
 (function () {
-  var TYPES = ['palace', 'flat', 'house', 'bungalo'];
-  var PIN_HEIGHT = 70;
-  var PIN_WIDTH = 50;
-  var TOP_LIMITER_PIN = 130;
-  var BOTTOM_LIMITER_PIN = 630;
-  var MAP_WIDTH = 1200;
-  var pinTemplate = document.querySelector('#pin')
-    .content
-    .querySelector('.map__pin');
   var map = document.querySelector('.map');
   var mainPin = map.querySelector('.map__pin--main');
   var form = document.querySelector('.ad-form');
@@ -17,8 +8,9 @@
   var selectList = document.querySelectorAll('select');
   var formFilter = map.querySelector('.map__filters');
   var fragment = document.createDocumentFragment();
-
-  formFilter.classList.add('map__filters--disabled');
+  var pinTemplate = document.querySelector('#pin')
+    .content
+    .querySelector('.map__pin');
   // Функция первого активирования страницы
   var onPinClick = function (evt) {
     evt.preventDefault();
@@ -35,40 +27,17 @@
     window.util.toggleAvailabilityFields(inputList);
     window.util.toggleAvailabilityFields(selectList);
   };
-  // проверка формы на активность
+
+    // проверка формы на активность
   window.util.toggleAvailabilityFields(inputList);
   window.util.toggleAvailabilityFields(selectList);
 
+
   mainPin.addEventListener('mousedown', onPinClick);
-  // функция созданя сгенерированных JS объектов
-  var createPinIformation = function (index) {
-    // определяет положение метки
-    var location = {
-      x: window.util.getNumber(1, MAP_WIDTH - PIN_WIDTH),
-      y: window.util.getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
-    };
-    // добавляет адрес
-    var address = {
-      x: location.x + PIN_WIDTH / 2,
-      y: location.y + PIN_HEIGHT
-    };
-    return {
-      // возвращает автора
-      author: {
-        avatar: 'img/avatars/user0' + (index + 1) + '.png'
-      },
-      address: address,
-      location: location,
-      // возвращает тип жилья
-      offer: {
-        type: window.util.getRandomElement(TYPES)
-      }
-    };
-  };
-  // функция отрисовки маркеров
+  // функция отрисовки случайных пинов
   var renderPin = function (index) {
     var pin = pinTemplate.cloneNode(true);
-    var pinIformation = createPinIformation(index);
+    var pinIformation = window.createPinIformation(index);
 
     pin.style.left = pinIformation.location.x + 'px';
     pin.style.top = pinIformation.location.y + 'px';
@@ -78,7 +47,7 @@
     return pin;
   };
 
-  // цикл отрисовки случайных меток
+  // цикл отрисовки случайных пинов
   for (var i = 0; i < 8; i++) {
     fragment.appendChild(renderPin(i));
   }

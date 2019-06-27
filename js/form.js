@@ -5,6 +5,7 @@
   var price = document.querySelector('#price');
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
+  var formAddress = document.querySelector('#address');
 
   var priceTypes = {
     bungalo: 0,
@@ -20,6 +21,12 @@
   // функция смены минимальной цены за ночь
   var onChangeType = function () {
     price.min = price.placeholder = priceTypes[type.value];
+  };
+  // функция получения адреса метки и передачи в input
+  window.setAddress = function (elem) {
+    var coordX = Math.round(elem.offsetLeft + elem.clientWidth / 2);
+    var coordY = Math.round(elem.offsetTop + elem.clientHeight);
+    formAddress.value = coordX + ', ' + coordY;
   };
 
   type.addEventListener('change', onChangeType);
