@@ -24,14 +24,12 @@
     timeIn.value = evt.target.value;
     timeOut.value = evt.target.value;
   };
-
   /**
   * @description функция смены минимальной цены за ночь
   */
   var onChangeType = function () {
     price.min = price.placeholder = priceTypes[type.value];
   };
-
   /**
   * @description функция получения адреса метки и передачи в input
   * @param {string} elem - элемент
@@ -43,6 +41,7 @@
     formAddress.value = coordX + ', ' + coordY;
   };
 
+  onChangeType();
   type.addEventListener('change', onChangeType);
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
