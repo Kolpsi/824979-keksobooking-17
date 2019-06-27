@@ -10,8 +10,23 @@
   var mainMap = document.querySelector('.map__pins');
   window.setAddress(mainPin);
 
-  mainPin.addEventListener('mousedown', function () {
+  mainPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+    /**
+    * @description функция получения координат
+    * @param {string} elem - элемент
+    * @return {number} координаты
+    */
+    function getCoords(elem) {
+      var box = elem.getBoundingClientRect();
 
+      return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+      };
+    }
+    var shiftX = evt.pageX - getCoords(mainPin).left;
+    var shiftY = evt.pageY - getCoords(mainPin).top;
     /**
     * передача адреса в input
     */
@@ -35,8 +50,8 @@
       };
 
       var pinCoords = {
-        top: event.clientY - fieldInnerCoords.top - mainPin.clientHeight,
-        left: event.clientX - fieldInnerCoords.left - mainPin.clientWidth
+        top: event.clientY - fieldInnerCoords.top - shiftY,
+        left: event.clientX - fieldInnerCoords.left - shiftX
       };
 
       /**
