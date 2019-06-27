@@ -1,5 +1,7 @@
 'use strict';
-// модуль взаимодействия с картой
+/**
+* @description модуль взаимодействия с картой
+*/
 (function () {
   var map = document.querySelector('.map');
   var mainPin = map.querySelector('.map__pin--main');
@@ -11,7 +13,11 @@
   var pinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
-  // Функция первого активирования страницы
+
+  /**
+  * @description функция первого активирования страницы
+  * @param {strin} evt - событие
+  */
   var onPinClick = function (evt) {
     evt.preventDefault();
     onMainPinActivated();
@@ -19,7 +25,9 @@
     mainPin.removeEventListener('mousedown', onPinClick);
   };
 
-  // функция активирования страницы
+  /**
+  * @description функция активирования страницы
+  */
   var onMainPinActivated = function () {
     map.classList.remove('map--faded');
     form.classList.remove('ad-form--disabled');
@@ -28,13 +36,20 @@
     window.util.toggleAvailabilityFields(selectList);
   };
 
-    // проверка формы на активность
+  /**
+  * проверка формы на активность
+  */
   window.util.toggleAvailabilityFields(inputList);
   window.util.toggleAvailabilityFields(selectList);
 
 
   mainPin.addEventListener('mousedown', onPinClick);
-  // функция отрисовки случайных пинов
+
+  /**
+  * @description функция отрисовки случайных пинов
+  * @param {strin} index - элемент массива
+  * @return {strin} pin - возвращает случайный пин
+  */
   var renderPin = function (index) {
     var pin = pinTemplate.cloneNode(true);
     var pinIformation = window.createPinIformation(index);
@@ -47,7 +62,9 @@
     return pin;
   };
 
-  // цикл отрисовки случайных пинов
+  /**
+  * цикл отрисовки случайных пинов
+  */
   for (var i = 0; i < 8; i++) {
     fragment.appendChild(renderPin(i));
   }

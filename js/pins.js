@@ -1,5 +1,7 @@
 'use strict';
-// модуль второстепенных пинов
+/**
+* @description модуль второстепенных пинов
+*/
 (function () {
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var PIN_HEIGHT = 70;
@@ -10,26 +12,42 @@
   var map = document.querySelector('.map');
   var formFilter = map.querySelector('.map__filters');
   formFilter.classList.add('map__filters--disabled');
-  // функция созданя сгенерированных JS объектов
+
+  /**
+  * @description модуль функция созданя сгенерированных JS объектов
+  * @param {string} index - элемент массива
+  * @return {object} информация по случайным пинам
+  */
   window.createPinIformation = function (index) {
-    // определяет положение метки
+
+    /**
+    * определяет положение метки
+    */
     var location = {
       x: window.util.getNumber(1, MAP_WIDTH - PIN_WIDTH),
       y: window.util.getNumber(TOP_LIMITER_PIN, BOTTOM_LIMITER_PIN)
     };
-    // добавляет адрес
+
+    /**
+    * добавляет адрес
+    */
     var address = {
       x: location.x + PIN_WIDTH / 2,
       y: location.y + PIN_HEIGHT
     };
     return {
-      // возвращает автора
+
+      /**
+      * возвращает автора
+      */
       author: {
         avatar: 'img/avatars/user0' + (index + 1) + '.png'
       },
       address: address,
       location: location,
-      // возвращает тип жилья
+      /**
+      * возвращает тип жилья
+      */
       offer: {
         type: window.util.getRandomElement(TYPES)
       }
