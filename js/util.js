@@ -7,7 +7,7 @@
   window.util = {
     /**
     * @description функция проверки неактивности формы
-    * @return {string}  css-селектор
+    * @return {boolean}  css-селектор
     */
     isFormDisabled: function () {
       return map.classList.contains('map--faded');
@@ -15,7 +15,7 @@
 
     /**
     * @description функция активирования и деактивирования элементов
-    * @param {string} array - массив
+    * @param {array} array - массив
     */
     toggleAvailabilityFields: function (array) {
       for (var i = 0; i < array.length; i++) {
@@ -40,8 +40,8 @@
 
     /**
     * @description Возвращает рандомный элемент
-    * @param {string} array - массив
-    * @return {string}  случайный элемент массива
+    * @param {array} array - массив
+    * @return {any}  случайный элемент массива
     */
     getRandomElement: function (array) {
       var index = Math.floor(Math.random() * array.length);

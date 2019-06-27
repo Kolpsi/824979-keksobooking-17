@@ -16,7 +16,7 @@
 
   /**
   * @description функция первого активирования страницы
-  * @param {strin} evt - событие
+  * @param {event} evt - событие
   */
   var onPinClick = function (evt) {
     evt.preventDefault();
@@ -49,8 +49,8 @@
 
   /**
   * @description функция отрисовки случайных пинов
-  * @param {strin} index - элемент массива
-  * @return {strin} pin - возвращает случайный пин
+  * @param {number} index - индекс элемент массива
+  * @return {object} pin - возвращает случайный пин
   */
   var renderPin = function (index) {
     var pin = pinTemplate.cloneNode(true);

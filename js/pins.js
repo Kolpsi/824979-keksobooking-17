@@ -15,7 +15,7 @@
 
   /**
   * @description модуль функция созданя сгенерированных JS объектов
-  * @param {string} index - элемент массива
+  * @param {number} index - индекс элемент массива
   * @return {object} информация по случайным пинам
   */
   window.createPinIformation = function (index) {

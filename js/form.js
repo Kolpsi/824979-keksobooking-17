@@ -18,22 +18,23 @@
 
   /**
   * @description функция синхронизации времени в форме
-  * @param {string} evt событие клика
+  * @param {event} evt - событие клика
   */
   var onChangeTime = function (evt) {
     timeIn.value = evt.target.value;
     timeOut.value = evt.target.value;
   };
+
   /**
   * @description функция смены минимальной цены за ночь
   */
   var onChangeType = function () {
     price.min = price.placeholder = priceTypes[type.value];
   };
+
   /**
   * @description функция получения адреса метки и передачи в input
-  * @param {string} elem - элемент
-  * return {string} координаты в поле адреса
+  * @param {object} elem - элемент
   */
   window.setAddress = function (elem) {
     var coordX = Math.round(elem.offsetLeft + elem.clientWidth / 2);

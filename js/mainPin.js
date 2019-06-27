@@ -12,10 +12,11 @@
 
   mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
+
     /**
     * @description функция получения координат
-    * @param {string} elem - элемент
-    * @return {number} координаты
+    * @param {object} elem - элемент
+    * @return {object} координаты
     */
     function getCoords(elem) {
       var box = elem.getBoundingClientRect();
@@ -34,7 +35,7 @@
 
     /**
     * @description функция перетаскиваня маркера
-    * @param {number} moveEvt движение мышки
+    * @param {event} moveEvt - движение мышки
     */
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
@@ -88,7 +89,7 @@
 
     /**
     * @description отжатие кнопки мыши
-    * @param {string} upEvt - событие отжатия кнопки мыши
+    * @param {event} upEvt - событие отжатия кнопки мыши
     */
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
