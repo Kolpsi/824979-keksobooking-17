@@ -5,6 +5,11 @@
 (function () {
   var URL = 'https://js.dump.academy/keksobooking/data';
 
+  /**
+  * @description функция получения данных с сервера
+  * @param {object} onSuccess - при успешном получении данных
+  * @param {object} onError - при ошибке получении данных
+  */
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -23,7 +28,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = 10000;
 
     xhr.open('GET', URL);
     xhr.send();

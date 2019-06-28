@@ -12,6 +12,7 @@
   var errorTempate = document.querySelector('#error')
     .content
     .querySelector('.error');
+
   /**
   * @description функция первого активирования страницы
   * @param {event} evt - событие
@@ -47,25 +48,28 @@
 
   /**
   * @description функция отрисовки пинов при успешном получении данных с сервера
-  * @param {array} backpins - массив
+  * @param {array} markers - массив
   */
-  var successHandler = function (backpins) {
+  var successHandler = function (markers) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < 8; i++) {
-      fragment.appendChild(window.renderPin(backpins[i]));
+      fragment.appendChild(window.renderPin(markers[i]));
     }
     map.appendChild(fragment);
   };
+
   /**
   * @description функция вывода сообщения об ошибки
   */
   var errorHandler = function () {
-    map.appendChild(errorTempate);
+    var main = document.querySelector('main');
+    main.appendChild(errorTempate);
+
     var closeError = document.querySelector('.error__button');
 
     closeError.addEventListener('click', function (evt) {
       evt.preventDefault();
-      map.removeChild(errorTempate);
+      main.removeChild(errorTempate);
     });
   };
 
