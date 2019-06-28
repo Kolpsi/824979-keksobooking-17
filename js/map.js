@@ -9,19 +9,17 @@
   var inputList = document.querySelectorAll('input');
   var selectList = document.querySelectorAll('select');
   var formFilter = map.querySelector('.map__filters');
-  var fragment = document.createDocumentFragment();
-  var pinTemplate = document.querySelector('#pin')
+  var errorTempate = document.querySelector('#error')
     .content
-    .querySelector('.map__pin');
-
+    .querySelector('.error');
   /**
   * @description функция первого активирования страницы
   * @param {event} evt - событие
   */
   var onPinClick = function (evt) {
     evt.preventDefault();
+    window.load(successHandler, errorHandler);
     onMainPinActivated();
-    map.appendChild(fragment);
     mainPin.removeEventListener('mousedown', onPinClick);
   };
 
@@ -48,26 +46,27 @@
   mainPin.addEventListener('mousedown', onPinClick);
 
   /**
-  * @description функция отрисовки случайных пинов
-  * @param {number} index - индекс элемент массива
-  * @return {object} pin - возвращает случайный пин
+  * @description функция отрисовки пинов при успешном получении данных с сервера
+  * @param {array} backpins - массив
   */
-  var renderPin = function (index) {
-    var pin = pinTemplate.cloneNode(true);
-    var pinIformation = window.createPinIformation(index);
+  var successHandler = function (backpins) {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < 8; i++) {
+      fragment.appendChild(window.renderPin(backpins[i]));
+    }
+    map.appendChild(fragment);
+  };
+  /**
+  * @description функция вывода сообщения об ошибки
+  */
+  var errorHandler = function () {
+    map.appendChild(errorTempate);
+    var closeError = document.querySelector('.error__button');
 
-    pin.style.left = pinIformation.location.x + 'px';
-    pin.style.top = pinIformation.location.y + 'px';
-    pin.querySelector('img').src = pinIformation.author.avatar;
-    pin.querySelector('img').alt = 'заголовок объявления';
-
-    return pin;
+    closeError.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      map.removeChild(errorTempate);
+    });
   };
 
-  /**
-  * цикл отрисовки случайных пинов
-  */
-  for (var i = 0; i < 8; i++) {
-    fragment.appendChild(renderPin(i));
-  }
 })();
