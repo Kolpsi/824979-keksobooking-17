@@ -9,10 +9,16 @@
   var inputList = document.querySelectorAll('input');
   var selectList = document.querySelectorAll('select');
   var formFilter = map.querySelector('.map__filters');
-  var fragment = document.createDocumentFragment();
-  var pinTemplate = document.querySelector('#pin')
+  var main = document.querySelector('main');
+  var errorTempate = document.querySelector('#error')
     .content
-    .querySelector('.map__pin');
+    .querySelector('.error');
+
+  /**
+  * Добавление экрана ошибки и скрытие его
+  */
+  main.appendChild(errorTempate);
+  errorTempate.classList.add('hidden');
 
   /**
   * @description функция первого активирования страницы
@@ -20,8 +26,8 @@
   */
   var onPinClick = function (evt) {
     evt.preventDefault();
+    window.load(successHandler, errorHandler);
     onMainPinActivated();
-    map.appendChild(fragment);
     mainPin.removeEventListener('mousedown', onPinClick);
   };
 
@@ -48,26 +54,31 @@
   mainPin.addEventListener('mousedown', onPinClick);
 
   /**
-  * @description функция отрисовки случайных пинов
-  * @param {number} index - индекс элемент массива
-  * @return {object} pin - возвращает случайный пин
+  * @description функция отрисовки пинов при успешном получении данных с сервера
+  * @param {array} markers - массив
   */
-  var renderPin = function (index) {
-    var pin = pinTemplate.cloneNode(true);
-    var pinIformation = window.createPinIformation(index);
-
-    pin.style.left = pinIformation.location.x + 'px';
-    pin.style.top = pinIformation.location.y + 'px';
-    pin.querySelector('img').src = pinIformation.author.avatar;
-    pin.querySelector('img').alt = 'заголовок объявления';
-
-    return pin;
+  var successHandler = function (markers) {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < 8; i++) {
+      fragment.appendChild(window.renderPin(markers[i]));
+    }
+    map.appendChild(fragment);
   };
 
   /**
-  * цикл отрисовки случайных пинов
+  * @description функция вывода сообщения об ошибки
   */
-  for (var i = 0; i < 8; i++) {
-    fragment.appendChild(renderPin(i));
-  }
+  var errorHandler = function () {
+    errorTempate.classList.remove('hidden');
+  };
+
+  /**
+  *  Повторный запрос данных с сервера при нажатие на кнопку
+  */
+  var closeError = document.querySelector('.error__button');
+  closeError.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.load(successHandler, errorHandler);
+    errorTempate.classList.add('hidden');
+  });
 })();
