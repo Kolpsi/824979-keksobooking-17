@@ -9,9 +9,16 @@
   var inputList = document.querySelectorAll('input');
   var selectList = document.querySelectorAll('select');
   var formFilter = map.querySelector('.map__filters');
+  var main = document.querySelector('main');
   var errorTempate = document.querySelector('#error')
     .content
     .querySelector('.error');
+
+  /**
+  * Добавление экрана ошибки и скрытие его
+  */
+  main.appendChild(errorTempate);
+  errorTempate.classList.add('hidden');
 
   /**
   * @description функция первого активирования страницы
@@ -62,15 +69,16 @@
   * @description функция вывода сообщения об ошибки
   */
   var errorHandler = function () {
-    var main = document.querySelector('main');
-    main.appendChild(errorTempate);
-
-    var closeError = document.querySelector('.error__button');
-
-    closeError.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      main.removeChild(errorTempate);
-    });
+    errorTempate.classList.remove('hidden');
   };
 
+  /**
+  *  Повторный запрос данных с сервера при нажатие на кнопку
+  */
+  var closeError = document.querySelector('.error__button');
+  closeError.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.load(successHandler, errorHandler);
+    errorTempate.classList.add('hidden');
+  });
 })();
