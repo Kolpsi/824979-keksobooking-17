@@ -48,10 +48,7 @@
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
   housingType.addEventListener('change', function () {
-    window.util.changeType(window.pins, housingType.value);
-    window.util.remove();
-    window.successHandler(window.pinTypes.slice(0, 5));
+    window.changeType(data, housingType.value);
+    window.successHandler(pinTypes);
   });
 })();
-
-

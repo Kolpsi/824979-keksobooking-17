@@ -57,12 +57,9 @@
   * @description функция отрисовки пинов при успешном получении данных с сервера
   * @param {array} pins - массив
   */
-  window.successHandler = function (pins) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(window.renderPin(pins[i]));
-    }
-    map.appendChild(fragment);
+  window.successHandler = function (data) {
+    var filtered = window.getFilteredPins(data);
+    window.renderPins(filtered);
   };
 
   /**

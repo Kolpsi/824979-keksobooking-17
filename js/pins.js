@@ -3,6 +3,7 @@
 * @description модуль второстепенных пинов
 */
 (function () {
+  var map = document.querySelector('.map');
   var pinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
@@ -12,14 +13,44 @@
   * @param {object} pins - объект
   * @return {object} pin - возвращает пин
   */
-  window.renderPin = function (pins) {
+  window.renderPins = function (pins) {
+    window.removePins();
     var pin = pinTemplate.cloneNode(true);
+    var fragment = document.createDocumentFragment();
 
-    pin.style.left = pins.location.x + 'px';
-    pin.style.top = pins.location.y + 'px';
-    pin.querySelector('img').src = pins.author.avatar;
-    pin.querySelector('img').alt = pins.offer.title;
+    for (var i = 0; i < pins.length; i++) {
+      fragment.appendChild(window.renderPins(pins[i]));
+    }
 
+    map.appendChild(fragment);
+
+    for (i = 0; i < pins.length; i++) {
+      return pins[i];
+    }
+
+    if (pins.length === 0) {
+      window.removePins();
+    } else {
+      pin.style.left = pins.location.x + 'px';
+      pin.style.top = pins.location.y + 'px';
+      pin.querySelector('img').src = pins.author.avatar;
+      pin.querySelector('img').alt = pins.offer.title;
+    }
     return pin;
+  };
+
+  window.getFilteredPins = function (data) {
+    var filterData = data
+    return filterData.slice(0, 5);
+  };
+
+  /**
+  * @description удаляет лишние пины
+  */
+  window.removePins = function () {
+    var obj = document.querySelectorAll('.map__pin');
+    for (var i = 1; i < obj.length; i++) {
+      obj[i].remove();
+    }
   };
 })();

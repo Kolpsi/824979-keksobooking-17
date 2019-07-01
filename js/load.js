@@ -15,8 +15,8 @@
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        window.pins = xhr.response;
-        onSuccess(window.pins.slice(0, 5));
+        window.data = xhr.response;
+        onSuccess(data);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
