@@ -13,10 +13,10 @@
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        onSuccess(xhr.response);
+        window.pins = xhr.response;
+        onSuccess(window.pins.slice(0, 5));
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }

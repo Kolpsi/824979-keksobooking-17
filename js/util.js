@@ -46,6 +46,32 @@
     getRandomElement: function (array) {
       var index = Math.floor(Math.random() * array.length);
       return array[index];
+    },
+
+    /**
+    * @description фильтр типа жилья
+    * @param {array} pins - массив
+    * @param {string} value - тип жилья
+    */
+    changeType: function (pins, value) {
+      window.pinTypes = window.pins.
+          filter(function (pin) {
+            if (value === 'any') {
+              return window.pinTypes;
+            } else {
+              return pin.offer.type === value;
+            }
+          });
+    },
+
+    /**
+    * @description удаляет лишние пины
+    */
+    remove: function () {
+      var obj = document.querySelectorAll('.map__pin');
+      for (var i = 1; i < obj.length; i++) {
+        obj[i].remove();
+      }
     }
   };
 })();

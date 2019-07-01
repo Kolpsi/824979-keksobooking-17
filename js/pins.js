@@ -9,16 +9,16 @@
 
   /**
   * @description функция возврата данных о пине
-  * @param {object} marker - объект
+  * @param {object} pins - объект
   * @return {object} pin - возвращает пин
   */
-  window.renderPin = function (marker) {
+  window.renderPin = function (pins) {
     var pin = pinTemplate.cloneNode(true);
 
-    pin.style.left = marker.location.x + 'px';
-    pin.style.top = marker.location.y + 'px';
-    pin.querySelector('img').src = marker.author.avatar;
-    pin.querySelector('img').alt = marker.offer.title;
+    pin.style.left = pins.location.x + 'px';
+    pin.style.top = pins.location.y + 'px';
+    pin.querySelector('img').src = pins.author.avatar;
+    pin.querySelector('img').alt = pins.offer.title;
 
     return pin;
   };
