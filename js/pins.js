@@ -9,7 +9,7 @@
     .querySelector('.map__pin');
 
   /**
-  * @description функция возврата данных о пине
+  * @description функция отрисовки пинов
   * @param {object} pins - объект
   * @return {object} pin - возвращает пин
   */
@@ -37,11 +37,6 @@
       pin.querySelector('img').alt = pins.offer.title;
     }
     return pin;
-  };
-
-  window.getFilteredPins = function (data) {
-    var filterData = data
-    return filterData.slice(0, 5);
   };
 
   /**

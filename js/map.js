@@ -55,7 +55,7 @@
 
   /**
   * @description функция отрисовки пинов при успешном получении данных с сервера
-  * @param {array} pins - массив
+  * @param {array} data - массив
   */
   window.successHandler = function (data) {
     var filtered = window.getFilteredPins(data);
