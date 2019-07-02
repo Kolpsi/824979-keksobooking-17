@@ -26,7 +26,7 @@
   */
   var onPinClick = function (evt) {
     evt.preventDefault();
-    window.load(successHandler, errorHandler);
+    window.load(window.successHandler, errorHandler);
     onMainPinActivated();
     mainPin.removeEventListener('mousedown', onPinClick);
   };
@@ -55,14 +55,12 @@
 
   /**
   * @description функция отрисовки пинов при успешном получении данных с сервера
-  * @param {array} markers - массив
+  * @param {array} data - массив
   */
-  var successHandler = function (markers) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < 8; i++) {
-      fragment.appendChild(window.renderPin(markers[i]));
-    }
-    map.appendChild(fragment);
+  window.successHandler = function (data) {
+    window.data = data;
+    var filtered = window.getFilteredPins(data);
+    window.drawPins(filtered);
   };
 
   /**
@@ -78,7 +76,8 @@
   var closeError = document.querySelector('.error__button');
   closeError.addEventListener('click', function (evt) {
     evt.preventDefault();
-    window.load(successHandler, errorHandler);
+    window.load(window.successHandler, errorHandler);
     errorTempate.classList.add('hidden');
+    window.successHandler();
   });
 })();

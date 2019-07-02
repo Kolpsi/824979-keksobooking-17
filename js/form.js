@@ -8,6 +8,7 @@
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
   var formAddress = document.querySelector('#address');
+  var housingType = document.querySelector('#housing-type');
 
   var priceTypes = {
     bungalo: 0,
@@ -46,4 +47,8 @@
   type.addEventListener('change', onChangeType);
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
+  housingType.addEventListener('change', function () {
+    var filtered = window.getFilteredPins(window.data);
+    window.drawPins(filtered);
+  });
 })();
