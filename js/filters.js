@@ -3,28 +3,31 @@
 * @description модуль фильтрации
 */
 (function () {
+  var housingType = document.querySelector('#housing-type');
   /**
     * @description фильтр типа жилья
-    * @param {string} value - тип жилья
+    * @param {array} data - массив у которого проводится выборка
+    * @return {array} отфильтрованный массив по типу
     */
-  window.changeType = function (value) {
-    window.pinTypes = window.data.
+  window.changeHouseType = function (data) {
+    var changeTypeData = data.
           filter(function (it) {
-            if (value === 'any') {
-              return window.pinTypes;
+            if (housingType.value === 'any') {
+              return data;
             } else {
-              return it.offer.type === value;
+              return it.offer.type === housingType.value;
             }
           });
+    return changeTypeData;
   };
 
   /**
     * @description фильтр массива по кол-ву
     * @param {array} data - массив
-    * @return {array} обрезанный массив
+    * @return {array} отфильтрованный массив по типу и кол-ву.
     */
   window.getFilteredPins = function (data) {
-    var filterData = data;
+    var filterData = window.changeHouseType(data);
     return filterData.slice(0, 5);
   };
 })();

@@ -58,8 +58,9 @@
   * @param {array} data - массив
   */
   window.successHandler = function (data) {
+    window.data = data;
     var filtered = window.getFilteredPins(data);
-    window.renderPins(filtered);
+    window.drawPins(filtered);
   };
 
   /**

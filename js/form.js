@@ -48,7 +48,7 @@
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
   housingType.addEventListener('change', function () {
-    window.changeType(housingType.value);
-    window.successHandler(window.pinTypes);
+    var filtered = window.getFilteredPins(window.data);
+    window.drawPins(filtered);
   });
 })();

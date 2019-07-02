@@ -9,34 +9,35 @@
     .querySelector('.map__pin');
 
   /**
-  * @description функция отрисовки пинов
+  * @description функция отрисовки одного пина
   * @param {object} pins - объект
   * @return {object} pin - возвращает пин
   */
-  window.renderPins = function (pins) {
-    window.removePins();
+  window.renderPin = function (pins) {
     var pin = pinTemplate.cloneNode(true);
+
+    pin.style.left = pins.location.x + 'px';
+    pin.style.top = pins.location.y + 'px';
+    pin.querySelector('img').src = pins.author.avatar;
+    pin.querySelector('img').alt = pins.offer.title;
+
+    return pin;
+  };
+  /**
+  * @description функция отрисовки всех пинов
+  * @param {array} pins - массив минов
+  */
+  window.drawPins = function (pins) {
+    window.removePins();
+
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < pins.length; i++) {
-      fragment.appendChild(window.renderPins(pins[i]));
+      fragment.appendChild(window.renderPin(pins[i]));
     }
 
     map.appendChild(fragment);
 
-    for (i = 0; i < pins.length; i++) {
-      return pins[i];
-    }
-
-    if (pins.length === 0) {
-      window.removePins();
-    } else {
-      pin.style.left = pins.location.x + 'px';
-      pin.style.top = pins.location.y + 'px';
-      pin.querySelector('img').src = pins.author.avatar;
-      pin.querySelector('img').alt = pins.offer.title;
-    }
-    return pin;
   };
 
   /**
