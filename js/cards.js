@@ -8,12 +8,20 @@
     .querySelector('.map__card');
   var map = document.querySelector('.map');
 
+  /**
+    * @description функция отрисовки карточки
+    * @param {array} cards - массив
+    */
   window.renderCard = function (cards) {
     var card = cardTemplate.cloneNode(true);
     map.appendChild(card);
-    changeInformation(cards)
+    changeInformation(cards);
   };
 
+  /**
+    * @description функция изменения информации в карточки
+    * @param {array} cards - массив
+    */
   var changeInformation = function (cards) {
     var title = map.querySelector('.popup__title');
     var address = map.querySelector('.popup__text--address');
@@ -41,6 +49,10 @@
     showingFeatures(filtered.offer.features);
   };
 
+  /**
+    * @description функция отображения удобств в карточке
+    * @param {array} array - массив
+    */
   var showingFeatures = function (array) {
     for (var i = 0; i < array.length; i++) {
       var featureSelector = ('.popup__feature--' + array[i]);
@@ -48,6 +60,11 @@
     }
   };
 
+  /**
+    * @description функция перевода объекта в читабельный вид
+    * @param {object} value - объект
+    * @return {string} typeName - тип жилья
+    */
   var changeName = function (value) {
     var typeName;
     if (value === 'flat') {
@@ -65,6 +82,11 @@
     return typeName;
   };
 
+  /**
+    * @description функция присваивания адреса изображению
+    * @param {string} photos - ссылка на изображение
+    * @return {object} image - возвращает изображение
+    */
   var getPhotoAdrress = function (photos) {
     var photo = map.querySelector('.popup__photo');
     var image = photo.cloneNode(true);
@@ -74,6 +96,10 @@
     return image;
   };
 
+  /**
+    * @description функция отрсовки изображения
+    * @param {array} photos - массив ссылок на картинки
+    */
   var renderPhoto = function (photos) {
     var photosBlock = map.querySelector('.popup__photos');
     var fragment = document.createDocumentFragment();
