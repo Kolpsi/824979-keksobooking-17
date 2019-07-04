@@ -8,12 +8,13 @@
     .querySelector('.map__card');
   var map = document.querySelector('.map');
 
-  window.renderCard = function () {
+  window.renderCard = function (cards) {
     var card = cardTemplate.cloneNode(true);
     map.appendChild(card);
+    changeInformation(cards)
   };
 
-  window.changeInformation = function (cards) {
+  var changeInformation = function (cards) {
     var title = map.querySelector('.popup__title');
     var address = map.querySelector('.popup__text--address');
     var price = map.querySelector('.popup__text--price');
@@ -21,11 +22,11 @@
     var guestAndRoom = map.querySelector('.popup__text--capacity');
     var checkTime = map.querySelector('.popup__text--time');
     var description = map.querySelector('.popup__description');
-
+    var avatar = map.querySelector('.popup__avatar');
+    var faciliti = Array.from(map.querySelectorAll('.popup__feature'));
     var filtered = cards[0];
 
-    var faciliti = Array.from(map.querySelectorAll('.popup__feature'));
-
+    avatar.src = filtered.author.avatar;
     title.textContent = filtered.offer.title;
     address.textContent = filtered.offer.address;
     price.textContent = filtered.offer.price + '₽/ночь';
@@ -37,15 +38,14 @@
     faciliti.forEach(function (it) {
       it.style = 'display: none';
     });
+    showingFeatures(filtered.offer.features);
   };
 
-
-  window.drawCard = function (cards) {
-    var fragment = document.createDocumentFragment();
-
-    fragment.appendChild(window.renderCard(cards));
-
-    map.appendChild(fragment);
+  var showingFeatures = function (array) {
+    for (var i = 0; i < array.length; i++) {
+      var featureSelector = ('.popup__feature--' + array[i]);
+      map.querySelector(featureSelector).style = 'display: inline-block';
+    }
   };
 
   var changeName = function (value) {
