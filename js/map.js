@@ -61,7 +61,8 @@
     window.data = data;
     var filtered = window.getFilteredPins(data);
     window.drawPins(filtered);
-    window.drawCard(data);
+    window.renderCard();
+    window.changeInformation(data)
   };
 
   /**
