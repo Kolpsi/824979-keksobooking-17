@@ -20,7 +20,7 @@
 
   /**
     * @description функция изменения информации в карточки
-    * @param {array} cards - массив
+    * @param {array} cards - объект с информацией о карточке
     */
   var changeInformation = function (cards) {
     var title = map.querySelector('.popup__title');
@@ -51,7 +51,7 @@
 
   /**
     * @description функция отображения удобств в карточке
-    * @param {array} array - массив
+    * @param {object} array - массив удобств в карточке
     */
   var showingFeatures = function (array) {
     for (var i = 0; i < array.length; i++) {
