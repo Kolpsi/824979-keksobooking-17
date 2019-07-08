@@ -8,24 +8,25 @@
     .querySelector('.map__card');
   var map = document.querySelector('.map');
   var TYPES_NAMES = {
-  flat: 'Квартира',
-  bungalo: 'Бунгало',
-  palace: 'Дворец',
-  house: 'Дом'
+    flat: 'Квартира',
+    bungalo: 'Бунгало',
+    palace: 'Дворец',
+    house: 'Дом'
   };
 
   /**
     * @description функция отрисовки карточки
-    * @param {array} cards - массив
     */
-  window.renderCard = function (cards) {
+  var renderCard = function () {
 
     var card = cardTemplate.cloneNode(true);
     map.appendChild(card);
-    var cardSelector = map.querySelector('.map__card')
+    var cardSelector = map.querySelector('.map__card');
     cardSelector.classList.add('hidden');
 
   };
+
+  renderCard();
 
   /**
     * @description функция изменения информации в карточки
@@ -81,6 +82,7 @@
       map.querySelector('.' + it).style = 'display: none';
     });
   };
+
   /**
     * @description функция перевода объекта в читабельный вид
     * @param {object} type - объект
