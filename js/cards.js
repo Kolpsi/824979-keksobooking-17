@@ -7,6 +7,12 @@
     .content
     .querySelector('.map__card');
   var map = document.querySelector('.map');
+  var TYPES_NAMES = {
+  flat: 'Квартира',
+  bungalo: 'Бунгало',
+  palace: 'Дворец',
+  house: 'Дом'
+  };
 
   /**
     * @description функция отрисовки карточки
@@ -32,7 +38,7 @@
     var description = map.querySelector('.popup__description');
     var avatar = map.querySelector('.popup__avatar');
     var faciliti = Array.from(map.querySelectorAll('.popup__feature'));
-    var filtered = cards[0];
+    var filtered = cards[1];
 
     avatar.src = filtered.author.avatar;
     title.textContent = filtered.offer.title;
@@ -43,43 +49,44 @@
     checkTime.textContent = 'Заезд после ' + filtered.offer.checkin + ', ' + 'выезд до ' + filtered.offer.checkout;
     description.textContent = filtered.offer.description;
     renderPhoto(filtered.offer.photos);
-    faciliti.forEach(function (it) {
-      it.style = 'display: none';
-    });
-    showingFeatures(filtered.offer.features);
+    showingFeature(filtered.offer.features);
+  };
+
+  /** Удаление элемента из массива.
+    * @param {string} value: значение, которое необходимо найти и удалить.
+    * @return {array} массив без удаленного элемента; false в противном случае.
+    */
+  Array.prototype.remove = function (value) {
+    var idx = this.indexOf(value);
+    if (idx !== -1) {
+      // Второй параметр - число элементов, которые необходимо удалить
+      return this.splice(idx, 1);
+    }
+    return false;
   };
 
   /**
     * @description функция отображения удобств в карточке
-    * @param {object} array - массив удобств в карточке
+    * @param {array} array - массив удобств в карточке
     */
-  var showingFeatures = function (array) {
+  var showingFeature = function (array) {
+    var filtered = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
+      'popup__feature--washer', 'popup__feature--elevator', 'popup__feature--conditioner'];
     for (var i = 0; i < array.length; i++) {
-      var featureSelector = ('.popup__feature--' + array[i]);
-      map.querySelector(featureSelector).style = 'display: inline-block';
+      var featureSelector = ('popup__feature--' + array[i]);
+      filtered.remove(featureSelector);
     }
+    filtered.forEach(function (it) {
+      map.querySelector('.' + it).style = 'display: none';
+    });
   };
-
   /**
     * @description функция перевода объекта в читабельный вид
-    * @param {object} value - объект
+    * @param {object} type - объект
     * @return {string} typeName - тип жилья
     */
-  var changeName = function (value) {
-    var typeName;
-    if (value === 'flat') {
-      typeName = 'Квартира';
-    }
-    if (value === 'bungalo') {
-      typeName = 'Бунгало';
-    }
-    if (value === 'house') {
-      typeName = 'Дом';
-    }
-    if (value === 'palace') {
-      typeName = 'Дворец';
-    }
-    return typeName;
+  var changeName = function (type) {
+    return TYPES_NAMES[type];
   };
 
   /**
