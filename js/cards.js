@@ -19,16 +19,19 @@
     * @param {array} cards - массив
     */
   window.renderCard = function (cards) {
+
     var card = cardTemplate.cloneNode(true);
     map.appendChild(card);
-    changeInformation(cards);
+    var cardSelector = map.querySelector('.map__card')
+    cardSelector.classList.add('hidden');
+
   };
 
   /**
     * @description функция изменения информации в карточки
     * @param {array} cards - объект с информацией о карточке
     */
-  var changeInformation = function (cards) {
+  window.changeInformation = function (cards) {
     var title = map.querySelector('.popup__title');
     var address = map.querySelector('.popup__text--address');
     var price = map.querySelector('.popup__text--price');
@@ -37,19 +40,17 @@
     var checkTime = map.querySelector('.popup__text--time');
     var description = map.querySelector('.popup__description');
     var avatar = map.querySelector('.popup__avatar');
-    var faciliti = Array.from(map.querySelectorAll('.popup__feature'));
-    var filtered = cards[1];
 
-    avatar.src = filtered.author.avatar;
-    title.textContent = filtered.offer.title;
-    address.textContent = filtered.offer.address;
-    price.textContent = filtered.offer.price + '₽/ночь';
-    houseType.textContent = changeName(filtered.offer.type);
-    guestAndRoom.textContent = filtered.offer.rooms + ' комнаты для ' + filtered.offer.guests + ' гостей';
-    checkTime.textContent = 'Заезд после ' + filtered.offer.checkin + ', ' + 'выезд до ' + filtered.offer.checkout;
-    description.textContent = filtered.offer.description;
-    renderPhoto(filtered.offer.photos);
-    showingFeature(filtered.offer.features);
+    avatar.src = cards.author.avatar;
+    title.textContent = cards.offer.title;
+    address.textContent = cards.offer.address;
+    price.textContent = cards.offer.price + '₽/ночь';
+    houseType.textContent = changeName(cards.offer.type);
+    guestAndRoom.textContent = cards.offer.rooms + ' комнаты для ' + cards.offer.guests + ' гостей';
+    checkTime.textContent = 'Заезд после ' + cards.offer.checkin + ', ' + 'выезд до ' + cards.offer.checkout;
+    description.textContent = cards.offer.description;
+    renderPhoto(cards.offer.photos);
+    showingFeature(cards.offer.features);
   };
 
   /** Удаление элемента из массива.
@@ -95,7 +96,7 @@
     * @return {object} image - возвращает изображение
     */
   var getPhotoAdrress = function (photos) {
-    var photo = map.querySelector('.popup__photo');
+    var photo = cardTemplate.querySelector('.popup__photo');
     var image = photo.cloneNode(true);
 
     image.src = photos;
@@ -110,13 +111,13 @@
   var renderPhoto = function (photos) {
     var photosBlock = map.querySelector('.popup__photos');
     var fragment = document.createDocumentFragment();
-    var photo = map.querySelector('.popup__photo');
-
+    var photo = Array.from(map.querySelectorAll('.popup__photo'));
     for (var i = 0; i < photos.length; i++) {
       fragment.appendChild(getPhotoAdrress(photos[i]));
     }
-
-    photo.remove();
+    photo.forEach(function (it) {
+      it.remove();
+    });
     photosBlock.appendChild(fragment);
   };
 })();

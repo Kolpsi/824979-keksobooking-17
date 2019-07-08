@@ -52,6 +52,17 @@
   * событие первого активирвания страницы
   */
   mainPin.addEventListener('mousedown', onPinClick);
+  map.addEventListener('click', function (evt) {
+    var target = evt.target;
+    if (target.value) {
+      var index = window.filtered[target.value];
+      window.changeInformation(index);
+      var cardSelector = map.querySelector('.map__card')
+      cardSelector.classList.remove('hidden')
+    } else {
+      return;
+    }
+  });
 
   /**
   * @description функция отрисовки пинов при успешном получении данных с сервера
@@ -59,8 +70,8 @@
   */
   window.successHandler = function (data) {
     window.data = data;
-    var filtered = window.getFilteredPins(data);
-    window.drawPins(filtered);
+    window.filtered = window.getFilteredPins(data);
+    window.drawPins(window.filtered);
     window.renderCard(data);
   };
 
