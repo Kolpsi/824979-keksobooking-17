@@ -46,6 +46,20 @@
     getRandomElement: function (array) {
       var index = Math.floor(Math.random() * array.length);
       return array[index];
+    },
+
+    /** Удаление элемента из массива.
+    * @param {array} array: массив из которого нужно удалить элемент
+    * @param {string} value: значение, которое необходимо найти и удалить.
+    * @return {array} массив без удаленного элемента; false в противном случае.
+    */
+    arrayRemove: function (array, value) {
+      var idx = array.indexOf(value);
+      if (idx !== -1) {
+      // Второй параметр - число элементов, которые необходимо удалить
+        return array.splice(idx, 1);
+      }
+      return false;
     }
   };
 })();

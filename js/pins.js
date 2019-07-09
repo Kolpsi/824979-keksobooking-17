@@ -16,6 +16,7 @@
   window.renderPin = function (pins) {
     var pin = pinTemplate.cloneNode(true);
 
+    pin.value = window.pinIndex;
     pin.style.left = pins.location.x + 'px';
     pin.style.top = pins.location.y + 'px';
     pin.querySelector('img').src = pins.author.avatar;
@@ -33,6 +34,7 @@
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < pins.length; i++) {
+      window.pinIndex = i;
       fragment.appendChild(window.renderPin(pins[i]));
     }
 
