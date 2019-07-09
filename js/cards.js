@@ -54,19 +54,6 @@
     showingFeature(cards.offer.features);
   };
 
-  /** Удаление элемента из массива.
-    * @param {string} value: значение, которое необходимо найти и удалить.
-    * @return {array} массив без удаленного элемента; false в противном случае.
-    */
-  Array.prototype.remove = function (value) {
-    var idx = this.indexOf(value);
-    if (idx !== -1) {
-      // Второй параметр - число элементов, которые необходимо удалить
-      return this.splice(idx, 1);
-    }
-    return false;
-  };
-
   /**
     * @description функция отображения удобств в карточке
     * @param {array} array - массив удобств в карточке
@@ -79,7 +66,7 @@
     });
     for (var i = 0; i < array.length; i++) {
       var featureSelector = ('popup__feature--' + array[i]);
-      filtered.remove(featureSelector);
+      window.util.arrayRemove(filtered, featureSelector);
     }
     filtered.forEach(function (it) {
       map.querySelector('.' + it).style = 'display: none';
