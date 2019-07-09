@@ -13,6 +13,7 @@
     palace: 'Дворец',
     house: 'Дом'
   };
+  var FEATURES
 
   /**
     * @description функция отрисовки карточки
@@ -74,6 +75,9 @@
   var showingFeature = function (array) {
     var filtered = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
       'popup__feature--washer', 'popup__feature--elevator', 'popup__feature--conditioner'];
+      filtered.forEach(function (it) {
+      map.querySelector('.' + it).style = 'display: inline-block';
+    });
     for (var i = 0; i < array.length; i++) {
       var featureSelector = ('popup__feature--' + array[i]);
       filtered.remove(featureSelector);
