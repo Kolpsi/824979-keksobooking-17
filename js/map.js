@@ -60,7 +60,7 @@
   */
   map.addEventListener('click', function (evt) {
     var target = evt.target;
-    if (target.value) {
+    if (target.classList.contains("map__pin")) {
       var index = window.filtered[target.value];
       window.changeInformation(index);
       cardSelector.classList.remove('hidden');
