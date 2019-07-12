@@ -12,12 +12,18 @@
   window.getFilteredPins = function (data) {
     var filterData = data.
           filter(function (it) {
-            if (housingType.value === 'any') {
-              return data;
-            } else {
-              return it.offer.type === housingType.value;
-            }
+            return filterHousingType(it);
           });
     return filterData.slice(0, 5);
   };
+
+  var filterHousingType = function (it) {
+    if (housingType.value === 'any') {
+      return window.data;
+    } else {
+      return it.offer.type === housingType.value;
+    }
+  };
+
 })();
+

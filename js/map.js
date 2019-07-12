@@ -82,7 +82,7 @@
   };
 
   /**
-  * @description функция активирования пина  показ информаци о карточке
+  * @description функция активирования пина и показ информаци о карточке
   * @param {event} evt - событие нажатия
   */
   var onMainPinActive = function (evt) {
@@ -90,6 +90,7 @@
     if (target.classList.contains('map__pin')) {
       checkPinActivated();
       target.classList.add('map__pin--active');
+      window.filtered = window.getFilteredPins(data);
       var index = window.filtered[target.value];
       window.changeInformation(index);
       cardSelector.classList.remove('hidden');
