@@ -9,6 +9,24 @@
   var timeOut = document.querySelector('#timeout');
   var formAddress = document.querySelector('#address');
   var housingType = document.querySelector('#housing-type');
+  var roomNumber = document.querySelector('#room_number');
+  var capacity = document.querySelector('#capacity');
+
+  roomNumber.addEventListener('change', function () {
+    if ((roomNumber.value === '100') && (capacity.value === '0') || (roomNumber.value === '1') && (capacity.value === '1')) {
+      return;
+    } else {
+      if ((roomNumber.value === '2') && (capacity.value === '1') || (roomNumber.value === '2') && (capacity.value === '2')) {
+        return;
+      } else {
+        if ((roomNumber.value === '3') && (capacity.value === '1') || (roomNumber.value === '3') && (capacity.value === '2') || (roomNumber.value === '3') && (capacity.value === '3')) {
+          return;
+        } else {
+          capacity.setCustomValidity('Неверное количество гостей');
+        }
+      }
+    }
+  });
 
   var priceTypes = {
     bungalo: 0,
