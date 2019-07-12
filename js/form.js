@@ -13,6 +13,7 @@
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
   var form = document.querySelector('.ad-form');
+  var formFilter = document.querySelector('.map__filters');
   var successTemplate = document.querySelector('#success')
     .content
     .querySelector('.success');
@@ -111,7 +112,7 @@
   type.addEventListener('change', onChangeType);
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
-  housingType.addEventListener('change', function () {
+  formFilter.addEventListener('change', function (evt) {
     var filtered = window.getFilteredPins(window.data);
     window.drawPins(filtered);
   });
