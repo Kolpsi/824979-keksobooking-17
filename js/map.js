@@ -157,6 +157,7 @@
     window.util.toggleAvailabilityFields(inputList);
     window.util.toggleAvailabilityFields(selectList);
     window.util.toggleAvailabilityFields(textAreaList);
+    window.util.toggleAvailabilityFields(buttonList);
     window.removePins();
     mainPinDisabled();
     mainPin.addEventListener('mousedown', onPinClick);
