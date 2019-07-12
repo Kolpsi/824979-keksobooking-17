@@ -75,17 +75,28 @@
     formAddress.value = coordX + ', ' + coordY;
   };
 
+  /**
+  * @description функция действия при успешной отправки данных на сервер
+  */
   var onSuccess = function () {
     success.classList.remove('hidden');
     success.addEventListener('click', onSuccessClick);
     main.addEventListener('keydown', onPopupEscPress);
+    window.onMainDisabled();
   };
 
+  /**
+  * @description функция скрывания окна успешной передачи данных
+  */
   var onSuccessClick = function () {
     success.classList.add('hidden');
     main.removeEventListener('keydown', onPopupEscPress);
-  }
+  };
 
+  /**
+  * @description функция скрывания окна успешной передачи данных по esc
+  * @param {event} evt - событие клика на esc
+  */
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       onSuccessClick();
@@ -107,6 +118,7 @@
   form.addEventListener('submit', function (evt) {
     window.upload(new FormData(form), onSuccess, window.errorHandler);
     evt.preventDefault();
+
   });
 
 })();

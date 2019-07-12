@@ -5,12 +5,22 @@
 (function () {
   var URL = 'https://js.dump.academy/keksobooking';
 
+  /**
+  * @description функция отправления данных на сервер
+  * @param {object} data - данные отправляемые на сервер
+  * @param {object} onSuccess - при успешном получении данных
+  * @param {object} onError - при ошибке получении данных
+  */
   window.upload = function (data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      onSuccess(xhr.response);
+      if (xhr.status === 200) {
+        onSuccess(xhr.response);
+      } else {
+        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      }
     });
 
     xhr.addEventListener('error', function () {
