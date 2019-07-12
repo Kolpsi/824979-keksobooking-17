@@ -28,7 +28,7 @@
   */
   var onPinClick = function (evt) {
     evt.preventDefault();
-    window.load(window.successHandler, errorHandler);
+    window.load(window.successHandler, window.errorHandler);
     onMainPinActivated();
     mainPin.removeEventListener('mousedown', onPinClick);
   };
@@ -60,7 +60,12 @@
   */
   map.addEventListener('click', function (evt) {
     var target = evt.target;
-    if (target.classList.contains("map__pin")) {
+    var pinActive = document.querySelector('.map__pin--active');
+    if (pinActive) {
+      pinActive.classList.remove('map__pin--active');
+    }
+    if (target.classList.contains('map__pin')) {
+      target.classList.add('map__pin--active');
       var index = window.filtered[target.value];
       window.changeInformation(index);
       cardSelector.classList.remove('hidden');
@@ -76,8 +81,10 @@
   * @description функция скрытия карточки по нажатию на кнопку закрыть
   */
   var onCloseClick = function () {
+    var pinActive = document.querySelector('.map__pin--active');
     cardSelector.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
+    pinActive.classList.remove('map__pin--active');
   };
 
   /**
@@ -103,7 +110,7 @@
   /**
   * @description функция вывода сообщения об ошибки
   */
-  var errorHandler = function () {
+  window.errorHandler = function () {
     errorTempate.classList.remove('hidden');
   };
 
@@ -113,7 +120,7 @@
   var closeError = document.querySelector('.error__button');
   closeError.addEventListener('click', function (evt) {
     evt.preventDefault();
-    window.load(window.successHandler, errorHandler);
+    window.load(window.successHandler, window.errorHandler);
     errorTempate.classList.add('hidden');
     window.successHandler();
   });
