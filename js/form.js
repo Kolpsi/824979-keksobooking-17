@@ -14,6 +14,8 @@
   var capacity = document.querySelector('#capacity');
   var form = document.querySelector('.ad-form');
   var formFilter = document.querySelector('.map__filters');
+  var map = document.querySelector('.map');
+  var cardSelector = map.querySelector('.map__card');
   var successTemplate = document.querySelector('#success')
     .content
     .querySelector('.success');
@@ -114,12 +116,11 @@
   timeOut.addEventListener('change', onChangeTime);
   formFilter.addEventListener('change', function (evt) {
     var filtered = window.getFilteredPins(window.data);
+    cardSelector.classList.add('hidden');
     window.drawPins(filtered);
   });
   form.addEventListener('submit', function (evt) {
     window.upload(new FormData(form), onSuccess, window.errorHandler);
     evt.preventDefault();
-
   });
-
 })();

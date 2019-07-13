@@ -88,9 +88,12 @@
   var onMainPinActive = function (evt) {
     var target = evt.target;
     if (target.classList.contains('map__pin')) {
+      if (target.matches('.map__pin--main')) {
+        return;
+      }
       checkPinActivated();
       target.classList.add('map__pin--active');
-      window.filtered = window.getFilteredPins(data);
+      window.filtered = window.getFilteredPins(window.data);
       var index = window.filtered[target.value];
       window.changeInformation(index);
       cardSelector.classList.remove('hidden');
@@ -144,12 +147,18 @@
     errorTempate.classList.remove('hidden');
   };
 
+  /**
+  * @description функция возвращающая главный пин в неактивное состояние
+  */
   var mainPinDisabled = function () {
     mainPin.style.left = MAIN_PIN__STYLE_LEFT + 'px';
     mainPin.style.top = MAIN_PIN_STYLE_TOP + 'px';
     window.setAddress(mainPin);
   };
 
+  /**
+  * @description функция возвращяющая страницу в неактивное состояние
+  */
   window.onMainDisabled = function () {
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
