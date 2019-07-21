@@ -3,10 +3,10 @@
 * @description модуль устранения дребезга
 */
 (function () {
-  var DEBOUNCE_INTERVAL = 3000; // ms
-
-  var lastTimeout;
   window.debounce = function (cb) {
+    var DEBOUNCE_INTERVAL = 3000; // ms
+
+    var lastTimeout;
     if (lastTimeout) {
       window.clearTimeout(lastTimeout);
     }
