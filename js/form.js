@@ -9,7 +9,6 @@
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
   var formAddress = document.querySelector('#address');
-  var housingType = document.querySelector('#housing-type');
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
   var form = document.querySelector('.ad-form');
@@ -114,7 +113,7 @@
   type.addEventListener('change', onChangeType);
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
-  formFilter.addEventListener('change', function (evt) {
+  formFilter.addEventListener('change', function () {
     var filtered = window.getFilteredPins(window.data);
     cardSelector.classList.add('hidden');
     window.drawPins(filtered);

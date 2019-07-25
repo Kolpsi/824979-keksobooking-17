@@ -97,9 +97,8 @@
       var index = window.filtered[target.value];
       window.changeInformation(index);
       cardSelector.classList.remove('hidden');
-    } else {
-      return;
     }
+    return;
   };
 
   /**

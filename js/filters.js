@@ -9,7 +9,6 @@
   var housingPrice = document.querySelector('#housing-price');
   var housingRoom = document.querySelector('#housing-rooms');
   var housingGuests = document.querySelector('#housing-guests');
-  var housingFeature = document.querySelector('#housing-features');
 
   /**
     * @description фильтр массива по кол-ву и типу
@@ -33,9 +32,8 @@
   var checkHousingType = function (it) {
     if (housingType.value === 'any') {
       return window.data;
-    } else {
-      return it.offer.type === housingType.value;
     }
+    return it.offer.type === housingType.value;
   };
 
   /**
@@ -77,8 +75,10 @@
   var checkGuests = function (it) {
     if (housingGuests.value === 'any') {
       return window.data;
-    } else if (Number(housingGuests.value) === 0) {
-      return it.offer.guests === 0;
+    } else {
+      if (Number(housingGuests.value) === 0) {
+        return it.offer.guests === 0;
+      }
     }
     return it.offer.guests === Number(housingGuests.value);
   };
