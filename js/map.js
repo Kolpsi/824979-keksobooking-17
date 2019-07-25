@@ -16,6 +16,10 @@
   var buttonList = form.querySelectorAll('button');
   var main = document.querySelector('main');
   var cardSelector = map.querySelector('.map__card');
+  var reset = document.querySelector('.ad-form__reset');
+  var preview = document.querySelector('.ad-form-header__preview');
+  var avatarImg = preview.querySelector('img');
+  var photoPreview = document.querySelector('.ad-form__photo');
   var errorTempate = document.querySelector('#error')
     .content
     .querySelector('.error');
@@ -26,6 +30,22 @@
   main.appendChild(errorTempate);
   errorTempate.classList.add('hidden');
 
+  /**
+  * Деактивирование страницы при клике на ресет
+  */
+  reset.addEventListener('click', function () {
+    window.onMainDisabled();
+  });
+
+  /**
+  * @description функция удаления фотографий жилья
+  */
+  var deletePhoto = function () {
+    var photoImg = photoPreview.querySelectorAll('img');
+    photoImg.forEach(function (it) {
+      photoPreview.removeChild(it);
+    });
+  };
   /**
   * @description функция первого активирования страницы
   * @param {event} evt - событие
@@ -170,6 +190,8 @@
     window.removePins();
     mainPinDisabled();
     mainPin.addEventListener('mousedown', onPinClick);
+    avatarImg.src = '../keksob/img/muffin-grey.svg';
+    deletePhoto();
   };
 
 
