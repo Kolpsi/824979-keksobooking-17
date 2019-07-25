@@ -116,7 +116,9 @@
   formFilter.addEventListener('change', function () {
     var filtered = window.getFilteredPins(window.data);
     cardSelector.classList.add('hidden');
-    window.drawPins(filtered);
+    window.debounce(function () {
+      window.drawPins(filtered);
+    });
   });
   form.addEventListener('submit', function (evt) {
     window.upload(new FormData(form), onSuccess, window.errorHandler);
