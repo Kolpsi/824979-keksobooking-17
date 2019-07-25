@@ -16,6 +16,10 @@
   var buttonList = form.querySelectorAll('button');
   var main = document.querySelector('main');
   var cardSelector = map.querySelector('.map__card');
+  var reset = document.querySelector('.ad-form__reset');
+  var preview = document.querySelector('.ad-form-header__preview');
+  var avatarImg = preview.querySelector('img');
+  var photoPreview = document.querySelector('.ad-form__photo');
   var errorTempate = document.querySelector('#error')
     .content
     .querySelector('.error');
@@ -26,6 +30,22 @@
   main.appendChild(errorTempate);
   errorTempate.classList.add('hidden');
 
+  /**
+  * Деактивирование страницы при клике на ресет
+  */
+  reset.addEventListener('click', function () {
+    window.onMainDisabled();
+  });
+
+  /**
+  * @description функция удаления фотографий жилья
+  */
+  var deletePhoto = function () {
+    var photoImg = photoPreview.querySelectorAll('img');
+    photoImg.forEach(function (it) {
+      photoPreview.removeChild(it);
+    });
+  };
   /**
   * @description функция первого активирования страницы
   * @param {event} evt - событие
@@ -82,20 +102,23 @@
   };
 
   /**
-  * @description функция активирования пина  показ информаци о карточке
+  * @description функция активирования пина и показ информаци о карточке
   * @param {event} evt - событие нажатия
   */
   var onMainPinActive = function (evt) {
     var target = evt.target;
     if (target.classList.contains('map__pin')) {
+      if (target.matches('.map__pin--main')) {
+        return;
+      }
       checkPinActivated();
       target.classList.add('map__pin--active');
+      window.filtered = window.getFilteredPins(window.data);
       var index = window.filtered[target.value];
       window.changeInformation(index);
       cardSelector.classList.remove('hidden');
-    } else {
-      return;
     }
+    return;
   };
 
   /**
@@ -143,12 +166,18 @@
     errorTempate.classList.remove('hidden');
   };
 
+  /**
+  * @description функция возвращающая главный пин в неактивное состояние
+  */
   var mainPinDisabled = function () {
     mainPin.style.left = MAIN_PIN__STYLE_LEFT + 'px';
     mainPin.style.top = MAIN_PIN_STYLE_TOP + 'px';
     window.setAddress(mainPin);
   };
 
+  /**
+  * @description функция возвращяющая страницу в неактивное состояние
+  */
   window.onMainDisabled = function () {
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
@@ -161,6 +190,8 @@
     window.removePins();
     mainPinDisabled();
     mainPin.addEventListener('mousedown', onPinClick);
+    avatarImg.src = '../keksob/img/muffin-grey.svg';
+    deletePhoto();
   };
 
 

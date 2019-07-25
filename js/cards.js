@@ -59,16 +59,16 @@
     * @param {array} array - массив удобств в карточке
     */
   var showingFeature = function (array) {
-    var filtered = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
+    var filtereds = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
       'popup__feature--washer', 'popup__feature--elevator', 'popup__feature--conditioner'];
-    filtered.forEach(function (it) {
+    filtereds.forEach(function (it) {
       map.querySelector('.' + it).style = 'display: inline-block';
     });
     for (var i = 0; i < array.length; i++) {
       var featureSelector = ('popup__feature--' + array[i]);
-      window.util.arrayRemove(filtered, featureSelector);
+      window.util.arrayRemove(filtereds, featureSelector);
     }
-    filtered.forEach(function (it) {
+    filtereds.forEach(function (it) {
       map.querySelector('.' + it).style = 'display: none';
     });
   };

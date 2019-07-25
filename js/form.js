@@ -9,10 +9,12 @@
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
   var formAddress = document.querySelector('#address');
-  var housingType = document.querySelector('#housing-type');
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
   var form = document.querySelector('.ad-form');
+  var formFilter = document.querySelector('.map__filters');
+  var map = document.querySelector('.map');
+  var cardSelector = map.querySelector('.map__card');
   var successTemplate = document.querySelector('#success')
     .content
     .querySelector('.success');
@@ -111,14 +113,13 @@
   type.addEventListener('change', onChangeType);
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
-  housingType.addEventListener('change', function () {
+  formFilter.addEventListener('change', function () {
     var filtered = window.getFilteredPins(window.data);
+    cardSelector.classList.add('hidden');
     window.drawPins(filtered);
   });
   form.addEventListener('submit', function (evt) {
     window.upload(new FormData(form), onSuccess, window.errorHandler);
     evt.preventDefault();
-
   });
-
 })();
