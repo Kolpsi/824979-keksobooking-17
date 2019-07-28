@@ -28,26 +28,6 @@
       }
     },
 
-    /**
-    * @description Возвращает случайное число из заданного промежутка
-    * @param {number} min – минимальное значение
-    * @param {number} max – максимальное значение
-    * @return {number} случайное число
-    */
-    getNumber: function (min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
-    },
-
-    /**
-    * @description Возвращает рандомный элемент
-    * @param {array} array - массив
-    * @return {any}  случайный элемент массива
-    */
-    getRandomElement: function (array) {
-      var index = Math.floor(Math.random() * array.length);
-      return array[index];
-    },
-
     /** Удаление элемента из массива.
     * @param {array} array: массив из которого нужно удалить элемент
     * @param {string} value: значение, которое необходимо найти и удалить.
