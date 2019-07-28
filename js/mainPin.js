@@ -3,8 +3,8 @@
 * @description модуль отрисовки пина
 */
 (function () {
-  var TOP_LIMITER_PIN = 130;
-  var BOTTOM_LIMITER_PIN = 630;
+  var TOP_LIMITER_PIN = 65;
+  var BOTTOM_LIMITER_PIN = 565;
   var map = document.querySelector('.map');
   var mainPin = map.querySelector('.map__pin--main');
   var mainMap = document.querySelector('.map__pins');
