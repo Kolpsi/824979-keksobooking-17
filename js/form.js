@@ -11,6 +11,7 @@
   var formAddress = document.querySelector('#address');
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
+  var CapacityOptions = capacity.querySelectorAll('option');
   var form = document.querySelector('.ad-form');
   var formFilter = document.querySelector('.map__filters');
   var map = document.querySelector('.map');
@@ -33,22 +34,45 @@
   };
 
   /**
-  * @description функция проверки соответствия поля гостей и номеров
+  * @description функция удаления не подходящих опций
   */
-  var validityRoom = function () {
-    if ((roomNumber.value === '100') && (capacity.value === '0') || (roomNumber.value === '1') && (capacity.value === '1')) {
-      capacity.setCustomValidity('');
-    } else {
-      if ((roomNumber.value === '2') && (capacity.value === '1') || (roomNumber.value === '2') && (capacity.value === '2')) {
-        capacity.setCustomValidity('');
-      } else {
-        if ((roomNumber.value === '3') && (capacity.value === '1') || (roomNumber.value === '3') && (capacity.value === '2') || (roomNumber.value === '3') && (capacity.value === '3')) {
-          capacity.setCustomValidity('');
-        } else {
-          capacity.setCustomValidity('Неверное количество гостей');
-        }
-      }
+  var inputRoomValidateNumber = function () {
+
+    CapacityOptions.forEach(function (element) {
+      element.remove();
+    });
+
+
+    /**
+    * @description функция проверки соответствия поля гостей и номеров
+    */
+    var insertCapacityOptions = function (elements) {
+      elements.forEach(function (element) {
+        capacity.appendChild(CapacityOptions[element]);
+      });
+    };
+
+    switch (roomNumber.selectedIndex) {
+      case 0:
+        insertCapacityOptions([2]);
+        break;
+      case 1:
+        insertCapacityOptions([1, 2]);
+        break;
+      case 2:
+        insertCapacityOptions([0, 1, 2]);
+        break;
+      case 3:
+        insertCapacityOptions([3]);
+        break;
     }
+  };
+
+  /**
+  * @description функция изменения колчества мест
+  */
+  var changeRoomNumber = function () {
+    inputRoomValidateNumber();
   };
 
   /**
@@ -106,10 +130,9 @@
   };
 
   onChangeType();
-  validityRoom();
+  inputRoomValidateNumber();
 
-  roomNumber.addEventListener('change', validityRoom);
-  capacity.addEventListener('change', validityRoom);
+  roomNumber.addEventListener('change', changeRoomNumber);
   type.addEventListener('change', onChangeType);
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
