@@ -15,7 +15,11 @@
   var capacity = form.querySelector('#capacity');
   var CapacityOptions = capacity.querySelectorAll('option');
   var formFilter = map.querySelector('.map__filters');
-  var cardSelector = map.querySelector('.map__card');
+  var photoPreview = form.querySelector('.ad-form__photo');
+  var inputList = document.querySelectorAll('input');
+  var selectList = document.querySelectorAll('select');
+  var textAreaList = form.querySelectorAll('textarea');
+  var buttonList = form.querySelectorAll('button');
   var successTemplate = document.querySelector('#success')
     .content
     .querySelector('.success');
@@ -92,16 +96,6 @@
     price.min = price.placeholder = priceTypes[type.value];
   };
 
-  /**
-  * @description функция получения адреса метки и передачи в input
-  * @param {object} elem - элемент
-  */
-  window.setAddress = function (elem) {
-    var PIN_WIDTH = elem.clientWidth / 2;
-    var coordX = Math.round(elem.offsetLeft + PIN_WIDTH);
-    var coordY = Math.round(elem.offsetTop + elem.clientHeight);
-    formAddress.value = coordX + ', ' + coordY;
-  };
 
   /**
   * @description функция действия при успешной отправки данных на сервер
@@ -110,7 +104,7 @@
     success.classList.remove('hidden');
     success.addEventListener('click', onSuccessClick);
     document.addEventListener('keydown', onPopupEscPress);
-    window.onMainDisabled();
+    window.map.onMainDisabled();
   };
 
   /**
@@ -131,6 +125,15 @@
     }
   };
 
+    /**
+  * проверка формы на активность
+  */
+  window.util.toggleAvailabilityFields(inputList);
+  window.util.toggleAvailabilityFields(selectList);
+  window.util.toggleAvailabilityFields(textAreaList);
+  window.util.toggleAvailabilityFields(buttonList);
+
+
   onChangeType();
   inputRoomValidateNumber();
 
@@ -139,14 +142,38 @@
   timeIn.addEventListener('change', onChangeTime);
   timeOut.addEventListener('change', onChangeTime);
   formFilter.addEventListener('change', function () {
-    var filtered = window.getFilteredPins(window.data);
+    var filtered = window.filters.getFilteredPins(window.data);
+    var cardSelector = map.querySelector('.map__card');
     cardSelector.classList.add('hidden');
     window.debounce(function () {
-      window.drawPins(filtered);
+      window.pins.drawPins(filtered);
     });
   });
   form.addEventListener('submit', function (evt) {
-    window.upload(new FormData(form), onSuccess, window.errorHandler);
+    window.backend.upload(new FormData(form), onSuccess, window.map.errorHandler);
     evt.preventDefault();
   });
+
+  window.form = {
+    /**
+    * @description функция получения адреса метки и передачи в input
+    * @param {object} elem - элемент
+    */
+    setAddress: function (elem) {
+      var PIN_WIDTH = elem.clientWidth / 2;
+      var coordX = Math.round(elem.offsetLeft + PIN_WIDTH);
+      var coordY = Math.round(elem.offsetTop + elem.clientHeight);
+      formAddress.value = coordX + ', ' + coordY;
+    },
+
+    /**
+    * @description функция удаления фотографий жилья
+    */
+    deletePhoto: function () {
+      var photoImg = photoPreview.querySelectorAll('img');
+      photoImg.forEach(function (it) {
+        photoPreview.removeChild(it);
+      });
+    }
+  };
 })();

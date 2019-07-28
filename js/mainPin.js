@@ -5,10 +5,12 @@
 (function () {
   var TOP_LIMITER_PIN = 65;
   var BOTTOM_LIMITER_PIN = 565;
+  var MAIN_PIN__STYLE_LEFT = 570;
+  var MAIN_PIN_STYLE_TOP = 375;
   var map = document.querySelector('.map');
   var mainPin = map.querySelector('.map__pin--main');
   var mainMap = map.querySelector('.map__pins');
-  window.setAddress(mainPin);
+  window.form.setAddress(mainPin);
 
   mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -31,7 +33,7 @@
     /**
     * передача адреса в input
     */
-    window.setAddress(mainPin);
+    window.form.setAddress(mainPin);
 
     /**
     * @description функция перетаскиваня маркера
@@ -93,7 +95,7 @@
     */
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      window.setAddress(mainPin);
+      window.form.setAddress(mainPin);
       /**
       * снятие обработчиков события
       */
@@ -104,4 +106,15 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  window.mainPin = {
+    /**
+    * @description функция возвращающая главный пин в неактивное состояние
+    */
+    mainPinDisabled: function () {
+      mainPin.style.left = MAIN_PIN__STYLE_LEFT + 'px';
+      mainPin.style.top = MAIN_PIN_STYLE_TOP + 'px';
+      window.form.setAddress(mainPin);
+    }
+  };
 })();

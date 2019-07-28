@@ -15,20 +15,6 @@
   var housingGuests = map.querySelector('#housing-guests');
 
   /**
-    * @description фильтр массива по кол-ву и типу
-    * @param {array} data - массив объявлений
-    * @return {array} отфильтрованный массив по всем фильтрам.
-    */
-  window.getFilteredPins = function (data) {
-    var filterData = data.
-          filter(function (filterElem) {
-            return checkHousingType(filterElem) && checkPrice(filterElem) &&
-              checkRoom(filterElem) && checkGuests(filterElem) && checkFeatures(filterElem);
-          });
-    return filterData.slice(MIN_ARRAY_LIMIT, MAX_ARRAY_LIMIT);
-  };
-
-  /**
     * @description фильтр по типу жилья
     * @param {object} object - объект объявления
     * @return {object} подходящее по параметрам объявление.
@@ -105,5 +91,20 @@
     return filtered;
   };
 
+  window.filters = {
+    /**
+    * @description фильтр массива по кол-ву и типу
+    * @param {array} data - массив объявлений
+    * @return {array} отфильтрованный массив по всем фильтрам.
+    */
+    getFilteredPins: function (data) {
+      var filterData = data.
+            filter(function (filterElem) {
+              return checkHousingType(filterElem) && checkPrice(filterElem) &&
+                checkRoom(filterElem) && checkGuests(filterElem) && checkFeatures(filterElem);
+            });
+      return filterData.slice(MIN_ARRAY_LIMIT, MAX_ARRAY_LIMIT);
+    }
+  };
 })();
 
