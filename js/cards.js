@@ -59,18 +59,25 @@
     * @param {array} array - массив удобств в карточке
     */
   var showingFeature = function (array) {
-    var filtereds = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
-      'popup__feature--washer', 'popup__feature--elevator', 'popup__feature--conditioner'];
-    filtereds.forEach(function (it) {
-      map.querySelector('.' + it).style = 'display: inline-block';
-    });
-    for (var i = 0; i < array.length; i++) {
-      var featureSelector = ('popup__feature--' + array[i]);
-      window.util.arrayRemove(filtereds, featureSelector);
+    var feature = document.querySelector('.popup__features');
+    if (array.length === 0) {
+      feature.classList.add('hidden');
+    } else {
+      feature.classList.remove('hidden');
+      var filtereds = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
+        'popup__feature--washer', 'popup__feature--elevator', 'popup__feature--conditioner'];
+      filtereds.forEach(function (it) {
+        map.querySelector('.' + it).style = 'display: inline-block';
+      });
+      for (var i = 0; i < array.length; i++) {
+        var featureSelector = ('popup__feature--' + array[i]);
+        window.util.arrayRemove(filtereds, featureSelector);
+      }
+      filtereds.forEach(function (it) {
+        map.querySelector('.' + it).style = 'display: none';
+      });
     }
-    filtereds.forEach(function (it) {
-      map.querySelector('.' + it).style = 'display: none';
-    });
+
   };
 
   /**
@@ -104,12 +111,23 @@
     var photosBlock = map.querySelector('.popup__photos');
     var fragment = document.createDocumentFragment();
     var photo = Array.from(map.querySelectorAll('.popup__photo'));
-    for (var i = 0; i < photos.length; i++) {
-      fragment.appendChild(getPhotoAdrress(photos[i]));
+
+
+    if (photos.length === 0) {
+      photosBlock.classList.add('hidden');
+      photo.forEach(function (it) {
+        it.remove();
+      });
+    } else {
+      photosBlock.classList.remove('hidden');
+
+      for (var i = 0; i < photos.length; i++) {
+        fragment.appendChild(getPhotoAdrress(photos[i]));
+      }
+      photo.forEach(function (it) {
+        it.remove();
+      });
+      photosBlock.appendChild(fragment);
     }
-    photo.forEach(function (it) {
-      it.remove();
-    });
-    photosBlock.appendChild(fragment);
   };
 })();
