@@ -107,18 +107,20 @@
   */
   var onMainPinActive = function (evt) {
     var target = evt.target;
-    if (target.classList.contains('map__pin')) {
-      if (target.matches('.map__pin--main')) {
-        return;
+    while (target !== evt.currentTarget) {
+      if (target.classList.contains('map__pin')) {
+        if (target.matches('.map__pin--main')) {
+          return;
+        }
+        checkPinActivated();
+        target.classList.add('map__pin--active');
+        window.filtered = window.getFilteredPins(window.data);
+        var index = window.filtered[target.value];
+        window.changeInformation(index);
+        cardSelector.classList.remove('hidden');
       }
-      checkPinActivated();
-      target.classList.add('map__pin--active');
-      window.filtered = window.getFilteredPins(window.data);
-      var index = window.filtered[target.value];
-      window.changeInformation(index);
-      cardSelector.classList.remove('hidden');
+      target = target.parentNode;
     }
-    return;
   };
 
   /**
