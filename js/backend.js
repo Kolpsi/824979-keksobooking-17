@@ -4,6 +4,7 @@
 */
 (function () {
   var SUCCES = 200;
+  var DELAY = 10000;
   var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
   var URL = 'https://js.dump.academy/keksobooking/data';
 
@@ -56,7 +57,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000;
+    xhr.timeout = DELAY;
 
     xhr.open('GET', URL);
     xhr.send();

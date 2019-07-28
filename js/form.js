@@ -96,7 +96,8 @@
   * @param {object} elem - элемент
   */
   window.setAddress = function (elem) {
-    var coordX = Math.round(elem.offsetLeft + elem.clientWidth / 2);
+    var PIN_WIDTH = elem.clientWidth / 2;
+    var coordX = Math.round(elem.offsetLeft + elem.PIN_WIDTH);
     var coordY = Math.round(elem.offsetTop + elem.clientHeight);
     formAddress.value = coordX + ', ' + coordY;
   };

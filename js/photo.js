@@ -4,6 +4,8 @@
 */
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var PHOTO_WIDTH = 70;
+  var PHOTO_HEIGHT = 70;
 
   var avatar = document.querySelector('#avatar');
   var preview = document.querySelector('.ad-form-header__preview');
@@ -44,8 +46,8 @@
 
       reader.addEventListener('load', function () {
         elem.src = reader.result;
-        elem.height = 70;
-        elem.width = 70;
+        elem.height = PHOTO_HEIGHT;
+        elem.width = PHOTO_WIDTH;
         photoPreview.appendChild(elem);
       });
 
