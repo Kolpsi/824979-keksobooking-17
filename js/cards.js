@@ -37,15 +37,21 @@
     */
   var showingFeature = function (cardFeatures) {
     var features = document.querySelectorAll('.popup__feature');
-    var setDisplayStyle = function (feature) {
-      document.querySelector('.popup__feature--' + feature).style = 'display: inline-block';
-    };
-    features.forEach(function (feature) {
-      feature.style = 'display: none';
-    });
+    var featuresBlock = cardSelector.querySelector('.popup__features');
+    if (cardFeatures.length === 0) {
+      featuresBlock.classList.add('hidden');
+    } else {
+      featuresBlock.classList.remove('hidden');
+      var setDisplayStyle = function (feature) {
+        document.querySelector('.popup__feature--' + feature).style = 'display: inline-block';
+      };
+      features.forEach(function (feature) {
+        feature.style = 'display: none';
+      });
 
-    for (var i = 0; i < cardFeatures.length; i++) {
-      setDisplayStyle(cardFeatures[i]);
+      for (var i = 0; i < cardFeatures.length; i++) {
+        setDisplayStyle(cardFeatures[i]);
+      }
     }
   };
 
