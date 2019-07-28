@@ -7,7 +7,7 @@
   var BOTTOM_LIMITER_PIN = 565;
   var map = document.querySelector('.map');
   var mainPin = map.querySelector('.map__pin--main');
-  var mainMap = document.querySelector('.map__pins');
+  var mainMap = map.querySelector('.map__pins');
   window.setAddress(mainPin);
 
   mainPin.addEventListener('mousedown', function (evt) {

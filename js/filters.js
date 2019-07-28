@@ -8,10 +8,11 @@
   var MIN_ARRAY_LIMIT = 0;
   var MAX_ARRAY_LIMIT = 5;
   var NUMBER_GUESTS_ZERO = 0;
-  var housingType = document.querySelector('#housing-type');
-  var housingPrice = document.querySelector('#housing-price');
-  var housingRoom = document.querySelector('#housing-rooms');
-  var housingGuests = document.querySelector('#housing-guests');
+  var map = document.querySelector('.map');
+  var housingType = map.querySelector('#housing-type');
+  var housingPrice = map.querySelector('#housing-price');
+  var housingRoom = map.querySelector('#housing-rooms');
+  var housingGuests = map.querySelector('#housing-guests');
 
   /**
     * @description фильтр массива по кол-ву и типу

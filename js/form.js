@@ -4,17 +4,17 @@
 */
 (function () {
   var ESC_KEYCODE = 27;
-  var type = document.querySelector('#type');
-  var price = document.querySelector('#price');
-  var timeIn = document.querySelector('#timein');
-  var timeOut = document.querySelector('#timeout');
-  var formAddress = document.querySelector('#address');
-  var roomNumber = document.querySelector('#room_number');
-  var capacity = document.querySelector('#capacity');
-  var CapacityOptions = capacity.querySelectorAll('option');
   var form = document.querySelector('.ad-form');
-  var formFilter = document.querySelector('.map__filters');
   var map = document.querySelector('.map');
+  var type = form.querySelector('#type');
+  var price = form.querySelector('#price');
+  var timeIn = form.querySelector('#timein');
+  var timeOut = form.querySelector('#timeout');
+  var formAddress = document.querySelector('#address');
+  var roomNumber = form.querySelector('#room_number');
+  var capacity = form.querySelector('#capacity');
+  var CapacityOptions = capacity.querySelectorAll('option');
+  var formFilter = map.querySelector('.map__filters');
   var cardSelector = map.querySelector('.map__card');
   var successTemplate = document.querySelector('#success')
     .content
@@ -97,7 +97,7 @@
   */
   window.setAddress = function (elem) {
     var PIN_WIDTH = elem.clientWidth / 2;
-    var coordX = Math.round(elem.offsetLeft + elem.PIN_WIDTH);
+    var coordX = Math.round(elem.offsetLeft + PIN_WIDTH);
     var coordY = Math.round(elem.offsetTop + elem.clientHeight);
     formAddress.value = coordX + ', ' + coordY;
   };

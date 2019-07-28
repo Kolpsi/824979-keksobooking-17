@@ -6,20 +6,20 @@
   var ESC_KEYCODE = 27;
   var MAIN_PIN__STYLE_LEFT = 570;
   var MAIN_PIN_STYLE_TOP = 375;
-  var map = document.querySelector('.map');
+  var main = document.querySelector('main');
+  var map = main.querySelector('.map');
   var mainPin = map.querySelector('.map__pin--main');
-  var form = document.querySelector('.ad-form');
+  var form = main.querySelector('.ad-form');
   var inputList = document.querySelectorAll('input');
   var selectList = document.querySelectorAll('select');
   var formFilter = map.querySelector('.map__filters');
-  var textAreaList = document.querySelectorAll('textarea');
+  var textAreaList = form.querySelectorAll('textarea');
   var buttonList = form.querySelectorAll('button');
-  var main = document.querySelector('main');
   var cardSelector = map.querySelector('.map__card');
-  var reset = document.querySelector('.ad-form__reset');
-  var preview = document.querySelector('.ad-form-header__preview');
+  var reset = form.querySelector('.ad-form__reset');
+  var preview = form.querySelector('.ad-form-header__preview');
   var avatarImg = preview.querySelector('img');
-  var photoPreview = document.querySelector('.ad-form__photo');
+  var photoPreview = form.querySelector('.ad-form__photo');
   var errorTempate = document.querySelector('#error')
     .content
     .querySelector('.error');
