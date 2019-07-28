@@ -152,6 +152,17 @@
   };
 
   /**
+  * @description функция скрытия ошибки по нажатию на кнопку esc
+  * @param {event} evt - событие нажатия
+  */
+  var onEscCloseError = function (evt) {
+     if (evt.keyCode === ESC_KEYCODE) {
+      errorTempate.classList.add('hidden');
+      document.removeEventListener('keydown', onEscCloseError)
+    }
+  };
+
+  /**
   * @description функция отрисовки пинов при успешном получении данных с сервера
   * @param {array} data - массив
   */
@@ -166,6 +177,7 @@
   */
   window.errorHandler = function () {
     errorTempate.classList.remove('hidden');
+    document.addEventListener('keydown', onEscCloseError)
   };
 
   /**
