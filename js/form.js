@@ -83,7 +83,7 @@
   var onSuccess = function () {
     success.classList.remove('hidden');
     success.addEventListener('click', onSuccessClick);
-    main.addEventListener('keydown', onPopupEscPress);
+    document.addEventListener('keydown', onPopupEscPress);
     window.onMainDisabled();
   };
 

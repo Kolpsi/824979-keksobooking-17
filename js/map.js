@@ -206,6 +206,7 @@
     mainPin.addEventListener('mousedown', onPinClick);
     avatarImg.src = '../keksob/img/muffin-grey.svg';
     deletePhoto();
+    cardSelector.classList.add('hidden');
   };
 
 
@@ -216,6 +217,5 @@
   closeError.addEventListener('click', function (evt) {
     evt.preventDefault();
     errorTempate.classList.add('hidden');
-    window.successHandler();
   });
 })();

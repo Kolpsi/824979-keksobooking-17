@@ -17,39 +17,39 @@
     */
   window.getFilteredPins = function (data) {
     var filterData = data.
-          filter(function (it) {
-            return checkHousingType(it) && checkPrice(it) &&
-              checkRoom(it) && checkGuests(it) && checkFeatures(it);
+          filter(function (filterElem) {
+            return checkHousingType(filterElem) && checkPrice(filterElem) &&
+              checkRoom(filterElem) && checkGuests(filterElem) && checkFeatures(filterElem);
           });
     return filterData.slice(0, 5);
   };
 
   /**
     * @description фильтр по типу жилья
-    * @param {object} it - объект объявления
+    * @param {object} object - объект объявления
     * @return {object} подходящее по параметрам объявление.
     */
-  var checkHousingType = function (it) {
+  var checkHousingType = function (object) {
     if (housingType.value === 'any') {
       return window.data;
     }
-    return it.offer.type === housingType.value;
+    return object.offer.type === housingType.value;
   };
 
   /**
     * @description фильтр по цене
-    * @param {object} it - объект объявления
+    * @param {object} price - объект объявления
     * @return {object} подходящее по параметрам объявление.
     */
-  var checkPrice = function (it) {
+  var checkPrice = function (price) {
     if (housingPrice.value === 'middle') {
-      return it.offer.price > LOWER_PRICE_LIMIT && it.offer.price < UPPER_PRICE_LIMIT;
+      return price.offer.price > LOWER_PRICE_LIMIT && price.offer.price < UPPER_PRICE_LIMIT;
     }
     if (housingPrice.value === 'low') {
-      return it.offer.price < LOWER_PRICE_LIMIT;
+      return price.offer.price < LOWER_PRICE_LIMIT;
     }
     if (housingPrice.value === 'high') {
-      return it.offer.price > UPPER_PRICE_LIMIT;
+      return price.offer.price > UPPER_PRICE_LIMIT;
     } else {
       return window.data;
     }
@@ -57,43 +57,43 @@
 
   /**
     * @description фильтр по количеству комнат
-    * @param {object} it - объект объявления
+    * @param {object} number - объект объявления
     * @return {object} подходящее по параметрам объявление.
     */
-  var checkRoom = function (it) {
+  var checkRoom = function (number) {
     if (housingRoom.value === 'any') {
       return window.data;
     }
-    return it.offer.rooms === Number(housingRoom.value);
+    return number.offer.rooms === Number(housingRoom.value);
   };
 
   /**
     * @description фильтр по количеству гостей
-    * @param {object} it - объект объявления
+    * @param {object} numberOfGuests - объект объявления
     * @return {object} подходящее по параметрам объявление.
     */
-  var checkGuests = function (it) {
+  var checkGuests = function (numberOfGuests) {
     if (housingGuests.value === 'any') {
       return window.data;
     } else {
       if (Number(housingGuests.value) === 0) {
-        return it.offer.guests === 0;
+        return numberOfGuests.offer.guests === 0;
       }
     }
-    return it.offer.guests === Number(housingGuests.value);
+    return numberOfGuests.offer.guests === Number(housingGuests.value);
   };
 
   /**
     * @description фильтр по наличию удобств
-    * @param {object} elem - объект объявления
+    * @param {object} features - объект объявления
     * @return {object} подходящее по параметрам объявление.
     */
-  var checkFeatures = function (elem) {
+  var checkFeatures = function (features) {
     var filterFeaturesCheckboxes = document.querySelectorAll('.map__features input[type=checkbox]:checked');
     var filtered = true;
     if (filterFeaturesCheckboxes.length) {
       filterFeaturesCheckboxes.forEach(function (checkbox) {
-        if (!elem.offer.features.includes(checkbox.value)) {
+        if (!features.offer.features.includes(checkbox.value)) {
           filtered = false;
         }
       });
