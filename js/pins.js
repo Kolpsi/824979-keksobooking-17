@@ -16,13 +16,17 @@
   window.renderPin = function (pins) {
     var pin = pinTemplate.cloneNode(true);
 
-    pin.value = window.pinIndex;
-    pin.style.left = pins.location.x + 'px';
-    pin.style.top = pins.location.y + 'px';
-    pin.querySelector('img').src = pins.author.avatar;
-    pin.querySelector('img').alt = pins.offer.title;
+    if (pins.offer) {
+      pin.value = window.pinIndex;
+      pin.style.left = pins.location.x + 'px';
+      pin.style.top = pins.location.y + 'px';
+      pin.querySelector('img').src = pins.author.avatar;
+      pin.querySelector('img').alt = pins.offer.title;
 
-    return pin;
+      return pin;
+    } else {
+      return null;
+    }
   };
   /**
   * @description функция отрисовки всех пинов
