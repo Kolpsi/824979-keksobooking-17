@@ -45,6 +45,7 @@
 
     /**
     * @description функция проверки соответствия поля гостей и номеров
+    * @param {array} elements - элемент
     */
     var insertCapacityOptions = function (elements) {
       elements.forEach(function (element) {

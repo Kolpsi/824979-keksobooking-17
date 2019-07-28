@@ -103,29 +103,22 @@
 
   /**
     * @description функция отображения удобств в карточке
-    * @param {array} array - массив удобств в карточке
+    * @param {array} cardFeatures - массив удобств в карточке
     */
-  var showingFeature = function (array) {
-    var feature = document.querySelector('.popup__features');
-    if (array.length === 0) {
-      feature.classList.add('hidden');
-    } else {
-      feature.classList.remove('hidden');
-      var filtereds = ['popup__feature--wifi', 'popup__feature--dishwasher', 'popup__feature--parking',
-        'popup__feature--washer', 'popup__feature--elevator', 'popup__feature--conditioner'];
-      filtereds.forEach(function (it) {
-        map.querySelector('.' + it).style = 'display: inline-block';
-      });
-      for (var i = 0; i < array.length; i++) {
-        var featureSelector = ('popup__feature--' + array[i]);
-        window.util.arrayRemove(filtereds, featureSelector);
-      }
-      filtereds.forEach(function (it) {
-        map.querySelector('.' + it).style = 'display: none';
-      });
-    }
+  var showingFeature = function (cardFeatures) {
+    var features = document.querySelectorAll('.popup__feature');
+    var setDisplayStyle = function (feature) {
+      document.querySelector('.popup__feature--' + feature).style = 'display: inline-block';
+    };
+    features.forEach(function (feature) {
+      feature.style = 'display: none';
+    });
 
+    for (var i = 0; i < cardFeatures.length; i++) {
+      setDisplayStyle(cardFeatures[i]);
+    }
   };
+
 
   /**
     * @description функция перевода объекта в читабельный вид

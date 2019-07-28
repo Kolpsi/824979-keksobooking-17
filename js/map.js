@@ -156,9 +156,9 @@
   * @param {event} evt - событие нажатия
   */
   var onEscCloseError = function (evt) {
-     if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === ESC_KEYCODE) {
       errorTempate.classList.add('hidden');
-      document.removeEventListener('keydown', onEscCloseError)
+      document.removeEventListener('keydown', onEscCloseError);
     }
   };
 
@@ -177,7 +177,7 @@
   */
   window.errorHandler = function () {
     errorTempate.classList.remove('hidden');
-    document.addEventListener('keydown', onEscCloseError)
+    document.addEventListener('keydown', onEscCloseError);
   };
 
   /**
