@@ -88,7 +88,8 @@
   /**
   * Деактивирование страницы при клике на ресет
   */
-  reset.addEventListener('click', function () {
+  reset.addEventListener('click', function (evt) {
+    evt.preventDefault();
     window.map.onMainDisabled();
   });
 
