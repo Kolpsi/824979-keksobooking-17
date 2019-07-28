@@ -8,46 +8,73 @@
     .content
     .querySelector('.map__pin');
 
+
+  window.pins = {
   /**
   * @description функция отрисовки одного пина
   * @param {object} pins - объект
   * @return {object} pin - возвращает пин
   */
-  window.renderPin = function (pins) {
-    var pin = pinTemplate.cloneNode(true);
+    renderPin: function (pins) {
+      var pin = pinTemplate.cloneNode(true);
 
-    pin.value = window.pinIndex;
-    pin.style.left = pins.location.x + 'px';
-    pin.style.top = pins.location.y + 'px';
-    pin.querySelector('img').src = pins.author.avatar;
-    pin.querySelector('img').alt = pins.offer.title;
+      if (pins.offer) {
+        pin.value = window.pinIndex;
+        pin.style.left = pins.location.x + 'px';
+        pin.style.top = pins.location.y + 'px';
+        pin.querySelector('img').src = pins.author.avatar;
+        pin.querySelector('img').alt = pins.offer.title;
 
-    return pin;
-  };
-  /**
-  * @description функция отрисовки всех пинов
-  * @param {array} pins - массив минов
-  */
-  window.drawPins = function (pins) {
-    window.removePins();
+        return pin;
+      } else {
+        return null;
+      }
+    },
+    /**
+    * @description функция отрисовки всех пинов
+    * @param {array} pins - массив минов
+    */
+    drawPins: function (pins) {
+      window.pins.removePins();
 
-    var fragment = document.createDocumentFragment();
+      var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < pins.length; i++) {
-      window.pinIndex = i;
-      fragment.appendChild(window.renderPin(pins[i]));
-    }
+      for (var i = 0; i < pins.length; i++) {
+        window.pinIndex = i;
+        fragment.appendChild(window.pins.renderPin(pins[i]));
+      }
 
-    map.appendChild(fragment);
-  };
+      map.appendChild(fragment);
+    },
 
-  /**
-  * @description удаляет лишние пины
-  */
-  window.removePins = function () {
-    var obj = document.querySelectorAll('.map__pin');
-    for (var i = 1; i < obj.length; i++) {
-      obj[i].remove();
+    /**
+    * @description удаляет лишние пины
+    */
+    removePins: function () {
+      var obj = document.querySelectorAll('.map__pin');
+      for (var i = 1; i < obj.length; i++) {
+        obj[i].remove();
+      }
+    },
+
+    /**
+    * @description функция проверки наличия активированных пинов
+    */
+    checkPinActivated: function () {
+      var pinActive = document.querySelector('.map__pin--active');
+      if (pinActive) {
+        pinActive.classList.remove('map__pin--active');
+      }
+    },
+
+    /**
+    * @description функция отрисовки пинов при успешном получении данных с сервера
+    * @param {array} data - массив
+    */
+    successHandler: function (data) {
+      window.data = data;
+      window.filtered = window.filters.getFilteredPins(data);
+      window.pins.drawPins(window.filtered);
     }
   };
 })();

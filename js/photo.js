@@ -4,12 +4,15 @@
 */
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var PHOTO_WIDTH = 70;
+  var PHOTO_HEIGHT = 70;
 
-  var avatar = document.querySelector('#avatar');
-  var preview = document.querySelector('.ad-form-header__preview');
+  var form = document.querySelector('.ad-form');
+  var avatar = form.querySelector('#avatar');
+  var preview = form.querySelector('.ad-form-header__preview');
   var avatarImg = preview.querySelector('img');
-  var photo = document.querySelector('#images');
-  var photoPreview = document.querySelector('.ad-form__photo');
+  var photo = form.querySelector('#images');
+  var photoPreview = form.querySelector('.ad-form__photo');
 
   avatar.addEventListener('change', function () {
     var file = avatar.files[0];
@@ -44,8 +47,8 @@
 
       reader.addEventListener('load', function () {
         elem.src = reader.result;
-        elem.height = 70;
-        elem.width = 70;
+        elem.height = PHOTO_HEIGHT;
+        elem.width = PHOTO_WIDTH;
         photoPreview.appendChild(elem);
       });
 
