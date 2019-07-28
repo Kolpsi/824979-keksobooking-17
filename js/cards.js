@@ -42,14 +42,61 @@
     var description = map.querySelector('.popup__description');
     var avatar = map.querySelector('.popup__avatar');
 
-    avatar.src = cards.author.avatar;
-    title.textContent = cards.offer.title;
-    address.textContent = cards.offer.address;
-    price.textContent = cards.offer.price + '₽/ночь';
-    houseType.textContent = changeName(cards.offer.type);
-    guestAndRoom.textContent = cards.offer.rooms + ' комнаты для ' + cards.offer.guests + ' гостей';
-    checkTime.textContent = 'Заезд после ' + cards.offer.checkin + ', ' + 'выезд до ' + cards.offer.checkout;
-    description.textContent = cards.offer.description;
+    if (cards.author.avatar) {
+      avatar.classList.remove('hidden');
+      avatar.src = cards.author.avatar;
+    } else {
+      avatar.classList.add('hidden');
+    }
+
+    if (cards.offer.title) {
+      title.classList.remove('hidden');
+      title.textContent = cards.offer.title;
+    } else {
+      title.classList.add('hidden');
+    }
+
+    if (cards.offer.address) {
+      address.classList.remove('hidden');
+      address.textContent = cards.offer.address;
+    } else {
+      address.classList.add('hidden');
+    }
+
+    if (cards.offer.price) {
+      price.classList.remove('hidden');
+      price.textContent = cards.offer.price + '₽/ночь';
+    } else {
+      price.classList.add('hidden');
+    }
+
+    if (cards.offer.type) {
+      houseType.classList.remove('hidden');
+      houseType.textContent = changeName(cards.offer.type);
+    } else {
+      houseType.classList.add('hidden');
+    }
+
+    if (cards.offer.rooms) {
+      guestAndRoom.classList.remove('hidden');
+      guestAndRoom.textContent = cards.offer.rooms + ' комнаты для ' + cards.offer.guests + ' гостей';
+    } else {
+      guestAndRoom.classList.add('hidden');
+    }
+
+    if (cards.offer.checkin && cards.offer.checkout) {
+      checkTime.classList.remove('hidden');
+      checkTime.textContent = 'Заезд после ' + cards.offer.checkin + ', ' + 'выезд до ' + cards.offer.checkout;
+    } else {
+      checkTime.classList.add('hidden');
+    }
+
+    if (cards.offer.description) {
+      description.classList.remove('hidden');
+      description.textContent = cards.offer.description;
+    } else {
+      description.classList.add('hidden');
+    }
     renderPhoto(cards.offer.photos);
     showingFeature(cards.offer.features);
   };
