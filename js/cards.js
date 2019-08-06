@@ -42,16 +42,10 @@
       featuresBlock.classList.add('hidden');
     } else {
       featuresBlock.classList.remove('hidden');
-      var setDisplayStyle = function (feature) {
-        document.querySelector('.popup__feature--' + feature).style = 'display: inline-block';
-      };
-      features.forEach(function (feature) {
-        feature.style = 'display: none';
-      });
 
-      for (var i = 0; i < cardFeatures.length; i++) {
-        setDisplayStyle(cardFeatures[i]);
-      }
+      features.forEach(function (feature) {
+        feature.style.display = (cardFeatures.indexOf(feature.classList[1].replace('popup__feature--', '')) === -1) ? 'none' : 'inline-block';
+      });
     }
   };
 
