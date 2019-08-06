@@ -4,13 +4,14 @@
 */
 (function () {
   var ESC_KEYCODE = 27;
-  var form = document.querySelector('.ad-form');
-  var map = document.querySelector('.map');
+  var main = document.querySelector('main');
+  var form = main.querySelector('.ad-form');
+  var map = main.querySelector('.map');
   var type = form.querySelector('#type');
   var price = form.querySelector('#price');
   var timeIn = form.querySelector('#timein');
   var timeOut = form.querySelector('#timeout');
-  var formAddress = document.querySelector('#address');
+  var formAddress = form.querySelector('#address');
   var roomNumber = form.querySelector('#room_number');
   var capacity = form.querySelector('#capacity');
   var CapacityOptions = capacity.querySelectorAll('option');
@@ -24,7 +25,7 @@
     .content
     .querySelector('.success');
 
-  var main = document.querySelector('main');
+
   main.appendChild(successTemplate);
 
   var success = document.querySelector('.success');
