@@ -20,11 +20,7 @@
     toggleAvailabilityFields: function (array) {
       for (var i = 0; i < array.length; i++) {
         var arrayElem = array[i];
-        if (window.util.isFormDisabled()) {
-          arrayElem.disabled = true;
-        } else {
-          arrayElem.disabled = false;
-        }
+        arrayElem.disabled = window.util.isFormDisabled();
       }
     },
 
