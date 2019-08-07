@@ -15,8 +15,19 @@
     * @param {object} onError - при ошибке получении данных
     * @param {object} formData - данные которые нужно отправить
     */
-    load: function (onSuccess, onError, formData) {
+    request: function (onSuccess, onError, formData) {
       var xhr = new XMLHttpRequest();
+
+      var load = function () {
+        xhr.open('GET', URL);
+        xhr.send();
+      };
+
+      var save = function () {
+        xhr.open('POST', URL_UPLOAD);
+        xhr.send(formData);
+      };
+
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
         if (xhr.status === SUCCES) {
@@ -36,12 +47,11 @@
       xhr.timeout = DELAY;
 
       if (formData) {
-        xhr.open('POST', URL_UPLOAD);
-        xhr.send(formData);
+        save();
       } else {
-        xhr.open('GET', URL);
-        xhr.send();
+        load();
       }
+
     }
   };
 })();

@@ -33,7 +33,7 @@
   */
   var onPinClick = function (evt) {
     evt.preventDefault();
-    window.backend.load(window.pins.successHandler, window.map.errorHandler);
+    window.backend.request(window.pins.successHandler, window.map.errorHandler);
     onMainPinActivated();
     mainPin.removeEventListener('mousedown', onPinClick);
   };
