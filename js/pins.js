@@ -15,7 +15,7 @@
   * @param {object} pins - объект
   * @return {object} pin - возвращает пин
   */
-    renderPin: function (pins) {
+    render: function (pins) {
       var pin = pinTemplate.cloneNode(true);
 
       if (pins.offer) {
@@ -35,13 +35,13 @@
     * @param {array} pins - массив минов
     */
     drawPins: function (pins) {
-      window.pins.removePins();
+      window.pins.remove();
 
       var fragment = document.createDocumentFragment();
 
       for (var i = 0; i < pins.length; i++) {
         window.pinIndex = i;
-        fragment.appendChild(window.pins.renderPin(pins[i]));
+        fragment.appendChild(window.pins.render(pins[i]));
       }
 
       map.appendChild(fragment);
@@ -50,7 +50,7 @@
     /**
     * @description удаляет лишние пины
     */
-    removePins: function () {
+    remove: function () {
       var obj = document.querySelectorAll('.map__pin');
       for (var i = 1; i < obj.length; i++) {
         obj[i].remove();
@@ -60,7 +60,7 @@
     /**
     * @description функция проверки наличия активированных пинов
     */
-    checkPinActivated: function () {
+    checkActivated: function () {
       var pinActive = document.querySelector('.map__pin--active');
       if (pinActive) {
         pinActive.classList.remove('map__pin--active');

@@ -190,7 +190,7 @@
     onCloseClick: function () {
       cardSelector.classList.add('hidden');
       document.removeEventListener('keydown', window.cards.onPopupEscPress);
-      window.pins.checkPinActivated();
+      window.pins.checkActivated();
     },
     /**
     * @description функция скрытия карточки по нажатию на кнопку esc
@@ -213,7 +213,7 @@
           if (target.matches('.map__pin--main')) {
             return;
           }
-          window.pins.checkPinActivated();
+          window.pins.checkActivated();
           target.classList.add('map__pin--active');
           window.filtered = window.filters.getFilteredPins(window.data);
           var index = window.filtered[target.value];

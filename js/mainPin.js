@@ -111,7 +111,7 @@
     /**
     * @description функция возвращающая главный пин в неактивное состояние
     */
-    mainPinDisabled: function () {
+    Disabled: function () {
       mainPin.style.left = MAIN_PIN__STYLE_LEFT + 'px';
       mainPin.style.top = MAIN_PIN_STYLE_TOP + 'px';
       window.form.setAddress(mainPin);
