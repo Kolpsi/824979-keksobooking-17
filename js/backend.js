@@ -10,7 +10,7 @@
 
   window.backend = {
     /**
-    * @description функция получения данных с сервера
+    * @description функция получения данных с сервера и отправки на сервер
     * @param {object} onSuccess - при успешном получении данных
     * @param {object} onError - при ошибке получении данных
     * @param {object} formData - данные которые нужно отправить
@@ -18,11 +18,17 @@
     request: function (onSuccess, onError, formData) {
       var xhr = new XMLHttpRequest();
 
+      /**
+      * @description функция получения данных с сервера
+      */
       var load = function () {
         xhr.open('GET', URL);
         xhr.send();
       };
 
+      /**
+      * @description функция отправки данных на сервер
+      */
       var save = function () {
         xhr.open('POST', URL_UPLOAD);
         xhr.send(formData);
