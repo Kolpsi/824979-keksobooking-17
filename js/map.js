@@ -115,7 +115,7 @@
       window.util.toggleAvailabilityFields(textAreaList);
       window.util.toggleAvailabilityFields(buttonList);
       window.pins.remove();
-      window.mainPin.Disabled();
+      window.mainPin.disabled();
       mainPin.addEventListener('mousedown', onPinClick);
       avatarImg.src = '../keksob/img/muffin-grey.svg';
       window.form.deletePhoto();
