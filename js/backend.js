@@ -20,12 +20,8 @@
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
         if (xhr.status === SUCCES) {
-          if (!formData) {
-            var data = xhr.response;
-            onSuccess(data);
-          } else {
-            var formData = xhr.response;
-          }
+          var data = xhr.response;
+          onSuccess(data);
         } else {
           onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
         }
@@ -43,7 +39,6 @@
         xhr.open('POST', URL_UPLOAD);
         xhr.send(formData);
       } else {
-
         xhr.open('GET', URL);
         xhr.send();
       }
