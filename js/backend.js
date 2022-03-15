@@ -5,7 +5,7 @@
 (function () {
   var SUCCES = 200;
   var DELAY = 10000;
-  var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
+  var URL_UPLOAD = 'https://js.dump.academy/keksobooking/data';
   var URL = 'https://js.dump.academy/keksobooking/data';
 
   window.backend = {
